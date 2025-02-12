@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Szybkie wykresy z Chart.js | Lazy Loading</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Szybkie wykresy z Chart.js" />
+<meta name="author" content="Tomasz Wiśniewski" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Blog o mobilnym programowaniu w C#" />
+<meta property="og:description" content="Blog o mobilnym programowaniu w C#" />
+<link rel="canonical" href="http://localhost:4000/2018/02/11/szybkie-wykresy-chart-js/" />
+<meta property="og:url" content="http://localhost:4000/2018/02/11/szybkie-wykresy-chart-js/" />
+<meta property="og:site_name" content="Lazy Loading" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-02-11T16:44:38+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Szybkie wykresy z Chart.js" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tomasz Wiśniewski"},"dateModified":"2018-02-11T16:44:38+01:00","datePublished":"2018-02-11T16:44:38+01:00","description":"Blog o mobilnym programowaniu w C#","headline":"Szybkie wykresy z Chart.js","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2018/02/11/szybkie-wykresy-chart-js/"},"url":"http://localhost:4000/2018/02/11/szybkie-wykresy-chart-js/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lazy Loading" /></head>
+<body><header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Lazy Loading</a>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="/external-articles/">Zewnętrzne artykuły</a><a class="page-link" href="/about/">O mnie</a></div>
+    </nav>
+  </div>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Szybkie wykresy z Chart.js</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-02-11T16:44:38+01:00" itemprop="datePublished">Feb 11, 2018
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Tomasz Wiśniewski</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+<p>Gdy pracowałem nad projektem testowania wydajności Xamarin.Forms chciałem stworzyć prosty sposób dla ludzi do obejrzenia wyników. Mało kto będzie na tyle zdeterminowany, żeby ściągać projekt z GitHuba i go odpalać. Dlatego stworzyłem stronę, na której można przejrzeć wszystkie wyniki (<a href="http://xamformsperf.azurewebsites.net">tutaj</a>). Na początku były to zwykłe tabelki, jednak tabelki, nawet z kolorami, nie są aż tak zachęcające. Dlatego postanowiłem zastąpić je wykresami. Zastanawiałem się, czego mogę używać. Myślałem o gotowych komponentach, np. od Syncfusion (strona jest napisana w ASP.NET MVC). Jednak wydawało mi się, że dla jednego wykresu będzie to za dużo zabawy. Dlatego poszukałem czegoś innego i znalazłem <a href="http://www.chartjs.org">chart.js</a>.</p>
+
+<h4 id="wprowadzenie">Wprowadzenie</h4>
+
+<p>Chart.js to biblioteka, jak nie trudno się domyślić, napisana w JavaScript 😉 Jest bardzo prosta w użyciu. Żeby zobaczyć pierwszy wykres na swojej stronie, wystarczy poświęcić jej kilka minut. Jednak mimo tego, że jest prosta, nadal posiada wiele opcji i wystarczy nam do różnych scenariuszy.</p>
+
+<h4 id="jak-zacząć">Jak zacząć?</h4>
+
+<p>Musimy dodać skrypt js do naszej strony. Możemy dodać go do projektu lub użyć CDN. Druga opcja jest chyba wygodniejsza. W moim projekcie wyglądało to po prostu tak:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/fb166fe88b470ec09b794a0c28a6c729.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/fb166fe88b470ec09b794a0c28a6c729).</noscript></div>
+<p>Gdy skrypt jest dodany, wtedy możemy wyświetlić pierwszy wykres. W miejscu, w którym chcemy go zobaczyć, dodajemy tag <code class="language-plaintext highlighter-rouge">canvas</code> z id oraz wysokością i szerokością.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/7142e4c97a46cf8b5eee485d29a63319.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/7142e4c97a46cf8b5eee485d29a63319).</noscript></div>
+<p>Następnie umieszczamy gdzieś skrypt, który wczyta do tego canvasa wykres. Powyżej widzimy najprostszy możliwy kod – wykres kolumnowy, z dwoma wartościami. Ważne jest to aby w obiekcie <code class="language-plaintext highlighter-rouge">data</code> dodać labele (oś x), i dataset z danymi w polu <code class="language-plaintext highlighter-rouge">data</code> – ilość danych powinna się zgadzać z ilością labeli. Tyle wystarczy, <code class="language-plaintext highlighter-rouge">backgroundColor</code> można pominąć, jednak zazwyczaj jest to przydatne. Efekt będzie taki:</p>
+
+<canvas height="300" id="myChart" width="800"></canvas>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue"],
+        datasets: [{
+            label: 'Which color do you like?',
+            data: [12, 19],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ]
+        }]
+    }
+});
+</script>
+
+<p>Jak widzimy brakuje nam pierwszej kolumny. Domyślnie oś y wyświetla się od najmniejszej wartości. Jeśli dodamy jednak do wykresu opcję <code class="language-plaintext highlighter-rouge">beginAtZero</code>, to otrzymamy oczekiwany efekt:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/a878cf2003aed7e4cbf6230a620f8982.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/a878cf2003aed7e4cbf6230a620f8982).</noscript></div>
+<canvas height="300" id="myChart2" width="800"></canvas>
+<script>
+var ctx = document.getElementById("myChart2").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue"],
+        datasets: [{
+            label: 'Which color do you like?',
+            data: [12, 19],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+<p>Dodałem także obramowanie dla kolumn. Jak widzisz, jest to bardzo proste.</p>
+
+<p>Teraz zauważyłem, że w poście wykresy te wyglądają na nie do końca wyraźne (nawet jak dopasowałem rozmiar pixel do pixela). Na stronie, którą robiłem nie ma tego problemu – możecie to zobaczyć <a href="http://xamformsperf.azurewebsites.net">tutaj</a>. Ciekawe. Szybkie googlowanie pokazuje, że jest to znany problem 🙂 Niestety nie udało mi się na szybko znaleźć rozwiązania.</p>
+
+<h4 id="opcje-i-pluginy">Opcje i pluginy</h4>
+
+<p>Właściwie tylko tyle potrzebujemy, żeby wyświetlać wykresy na naszej stronie. Jednak tak jak mówiłem, chart.js posiada wiele opcji, których najlepiej szukać w <a href="http://www.chartjs.org/docs/latest/">dokumentacji</a>. Warto też spojrzeć na <a href="http://www.chartjs.org/samples/latest/">przykłady</a> – tutaj pewnie będzie nawet łatwiej znaleźć to, czego potrzebujemy. Jako że jest to js, możemy go bez problemu podejrzeć w kodzie strony.</p>
+
+<p>Jeśli czegoś nie znajdziemy, to do chart.js dostępne są także pluginy. Mi osobiści przydał się plugin do wyświetlania tooltipów po najechaniu na kolumny – <a href="https://github.com/chartjs/chartjs-plugin-datalabels">tutaj link</a>. Jest on również dostępny przez cdn i wystarczy go wczytać tak jak chart.js. <a href="http://www.chartjs.org/docs/latest/notes/extensions.html">Tutaj</a> znajdziemy listę popularnych rozszerzeń.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Post jest krótki, ale więcej chyba nie potrzeba. Chart.js to prosta w użyciu biblioteka do wykresów, która daje nam duże możliwości. Nie spotkałem się z większymi problemami podczas jej używania. Dopiero podczas pisania tego posta, natknąłem się na problem z lekko rozmazanymi wykresami. Jednak gdyby spędzić nad tym wystarczająco dużo czasu, pewnie da się to poprawić. Chart.js to na pewno świetna alternatywa dla innych, bardziej rozbudowanych bibliotek i warto jej użyć, gdy chcemy szybko zobaczyć efekty.</p>
+
+  </div><a class="u-url" href="/2018/02/11/szybkie-wykresy-chart-js/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Lazy Loading</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Lazy Loading</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomwis"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomwis</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog o mobilnym programowaniu w C#</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Sprawdzanie wydajności w Xamarin.Forms | Lazy Loading</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Sprawdzanie wydajności w Xamarin.Forms" />
+<meta name="author" content="Tomasz Wiśniewski" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Kiedyś zdarzyło mi się przeprowadzić testy wydajnościowe Xamarina. Porównywałem Xamarin.Forms do Xamarin.Android i do aplikacji w Javie. Testy te robiłem wtedy tylko dla Androida. Wyniki możecie obejrzeć tutaj oraz tutaj. Ogólnie rzecz biorąc, nie były one dobre dla Xamarin.Forms." />
+<meta property="og:description" content="Kiedyś zdarzyło mi się przeprowadzić testy wydajnościowe Xamarina. Porównywałem Xamarin.Forms do Xamarin.Android i do aplikacji w Javie. Testy te robiłem wtedy tylko dla Androida. Wyniki możecie obejrzeć tutaj oraz tutaj. Ogólnie rzecz biorąc, nie były one dobre dla Xamarin.Forms." />
+<link rel="canonical" href="http://localhost:4000/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/" />
+<meta property="og:url" content="http://localhost:4000/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/" />
+<meta property="og:site_name" content="Lazy Loading" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-12-17T12:08:15+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Sprawdzanie wydajności w Xamarin.Forms" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tomasz Wiśniewski"},"dateModified":"2017-12-17T12:08:15+01:00","datePublished":"2017-12-17T12:08:15+01:00","description":"Kiedyś zdarzyło mi się przeprowadzić testy wydajnościowe Xamarina. Porównywałem Xamarin.Forms do Xamarin.Android i do aplikacji w Javie. Testy te robiłem wtedy tylko dla Androida. Wyniki możecie obejrzeć tutaj oraz tutaj. Ogólnie rzecz biorąc, nie były one dobre dla Xamarin.Forms.","headline":"Sprawdzanie wydajności w Xamarin.Forms","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/"},"url":"http://localhost:4000/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lazy Loading" /></head>
+<body><header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Lazy Loading</a>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="/external-articles/">Zewnętrzne artykuły</a><a class="page-link" href="/about/">O mnie</a></div>
+    </nav>
+  </div>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Sprawdzanie wydajności w Xamarin.Forms</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-12-17T12:08:15+01:00" itemprop="datePublished">Dec 17, 2017
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Tomasz Wiśniewski</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Kiedyś zdarzyło mi się przeprowadzić testy wydajnościowe Xamarina. Porównywałem Xamarin.Forms do Xamarin.Android i do aplikacji w Javie. Testy te robiłem wtedy tylko dla Androida. Wyniki możecie obejrzeć <a href="https://amellsoftware.com/2016/07/28/android-performance-java-vs-xamarin-vs-xamarin-forms/">tutaj</a> oraz <a href="https://amellsoftware.com/2016/08/04/android-performance-java-vs-xamarin-vs-xamarin-forms-part-2/">tutaj</a>. Ogólnie rzecz biorąc, nie były one dobre dla Xamarin.Forms.</p>
+
+<h4 id="xamarinforms--czy-następna-wersja-będzie-wydajniejsza">Xamarin.Forms – czy następna wersja będzie wydajniejsza?</h4>
+
+<p>Jakiś czas temu, przeglądając forum Xamarina, natknąłem się na pomysł stworzenia aplikacji, która mierzyłaby wydajność Xamarin.Forms pomiędzy kolejnymi wersjami. Chodzi głównie o to, żeby zobaczyć, czy są wykonywane jakieś optymalizacje, czy może wydajność spada i w jakich obszarach się to dzieje. Był to pomysł podsunięty zespołowi Xamarina, ale znając życie, niewiele się w tym temacie u nich dzieje 🙂 Dlatego ostatnio zacząłem sam pracować nad taką aplikacją (nazwa robocza XFP) i posiadam jakiś pierwszy prototyp. Obecnie aplikacja mierzy 7 rzeczy:</p>
+
+<ul>
+  <li>Czas wykonywania metody <code class="language-plaintext highlighter-rouge">Forms.Init()</code></li>
+  <li>Czas wykonywania metody <code class="language-plaintext highlighter-rouge">LoadApplication()</code></li>
+  <li>Czas do pojawienia się pierwszego widoku (początek – przed metodą <code class="language-plaintext highlighter-rouge">Forms.Init()</code>, koniec – w <code class="language-plaintext highlighter-rouge">OnAppearing()</code> pierwszej strony)</li>
+  <li>Czas tworzenia i renderowania kontrolki <code class="language-plaintext highlighter-rouge">BoxView</code></li>
+  <li>Czas tworzenia i renderowania kontrolki <code class="language-plaintext highlighter-rouge">Button</code></li>
+  <li>Czas tworzenia i renderowania kontrolki <code class="language-plaintext highlighter-rouge">Label</code></li>
+  <li>Czas tworzenia i renderowania kontrolki <code class="language-plaintext highlighter-rouge">Image</code></li>
+</ul>
+
+<p>Na razie tylko tyle, chociaż jeśli będzie to dobrze wyglądać, to planuję dodać sporo więcej testów sprawdzających także inne kontrolki, layouty, różne ich kombinacje, itp.</p>
+
+<p>Obecnie, aplikację można pobrać z Githuba: <a href="https://github.com/tomwis/XamFormsPerf">https://github.com/tomwis/XamFormsPerf</a></p>
+
+<p>Działa dla Androida, iOSa i UWP. Gdy uruchomimy aplikację testy zaczynają się automatycznie i po momencie dostaniemy podsumowanie. Możemy również wykonać kilka pętli testów i dostaniemy uśredniony wynik.</p>
+
+<h4 id="automatyzacja">Automatyzacja</h4>
+
+<p>Jednak takie testy najlepiej jeszcze bardziej zautomatyzować – za pomocą testów UI. Co robi taki test:</p>
+
+<ul>
+  <li>Otwiera aplikację – tu następnie testy w aplikacji wykonują się automatycznie</li>
+  <li>Pobiera podsumowanie testów i zapisuje je w pliku .csv</li>
+  <li>Powtarza powyższe w ilu pętlach chcemy</li>
+</ul>
+
+<p>Dodałem wykonywanie testów w pętlach, ponieważ dobrze jest wykonać takie testy przynajmniej kilka razy i uśrednić wynik. Taki uśredniony wynik również otrzymamy na koniec w oddzielnym pliku csv.</p>
+
+<p>Na razie stworzyłem takie testy tylko dla Androida, ponieważ Xamarin.UITest nie wspiera UWP, a testów dla iOS nie da się pisać na Windowsie 🙂 Resztę postaram się dopisać w miarę możliwości nieco później.</p>
+
+<p>Testy najlepiej wykonywać albo zawsze na tym samym urządzeniu albo od nowa dla wszystkich interesujących nas wersji Xamarin.Forms. Druga metoda być może jest nawet lepsza, bo wtedy wiemy, że testujemy na urządzeniu w podobnym stanie, z tą samą wersję systemu, itp. Wyniki powinny być w ten sposób bardziej miarodajne.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Zobaczymy, czy pomysł się sprawdzi i czy dostanę z tego jakieś użyteczne dane. Najlepiej byłoby prezentować te dane gdzieś online, z ładnymi wykresami, tabelkami i porównaniami między wersjami. Zobaczymy.</p>
+
+  </div><a class="u-url" href="/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Lazy Loading</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Lazy Loading</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomwis"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomwis</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog o mobilnym programowaniu w C#</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

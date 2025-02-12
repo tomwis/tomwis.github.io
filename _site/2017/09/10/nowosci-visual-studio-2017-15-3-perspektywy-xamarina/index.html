@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Nowości w Visual Studio 2017 i 15.3 z perspektywy Xamarina | Lazy Loading</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Nowości w Visual Studio 2017 i 15.3 z perspektywy Xamarina" />
+<meta name="author" content="Tomasz Wiśniewski" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Visual Studio 2017 jest dostępny od marca tego roku. Ostatnio wyszła nowa, większa aktualizacja, 15.3, która mogła być interesująca. A jak wyszło? Zobaczmy. Przejdziemy przez ciekawsze nowości zarówno wersji podstawowej, jak i aktualizacji, które są ważne z punktu widzenia dewelopera Xamarina. Uściślę tylko, że mam tu na myśli normalnego Visual Studio, a nie Xamarin Studio na Maca, któremu zmieniono nazwę na Visual Studio for Mac. Jest to tylko zabieg marketingowy i program ten nie ma nic wspólnego z prawdziwym Visualem. Niestety wprowadza to trochę w błąd, zwłaszcza nowych użytkowników." />
+<meta property="og:description" content="Visual Studio 2017 jest dostępny od marca tego roku. Ostatnio wyszła nowa, większa aktualizacja, 15.3, która mogła być interesująca. A jak wyszło? Zobaczmy. Przejdziemy przez ciekawsze nowości zarówno wersji podstawowej, jak i aktualizacji, które są ważne z punktu widzenia dewelopera Xamarina. Uściślę tylko, że mam tu na myśli normalnego Visual Studio, a nie Xamarin Studio na Maca, któremu zmieniono nazwę na Visual Studio for Mac. Jest to tylko zabieg marketingowy i program ten nie ma nic wspólnego z prawdziwym Visualem. Niestety wprowadza to trochę w błąd, zwłaszcza nowych użytkowników." />
+<link rel="canonical" href="http://localhost:4000/2017/09/10/nowosci-visual-studio-2017-15-3-perspektywy-xamarina/" />
+<meta property="og:url" content="http://localhost:4000/2017/09/10/nowosci-visual-studio-2017-15-3-perspektywy-xamarina/" />
+<meta property="og:site_name" content="Lazy Loading" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-10T15:09:55+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Nowości w Visual Studio 2017 i 15.3 z perspektywy Xamarina" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tomasz Wiśniewski"},"dateModified":"2017-09-10T15:09:55+02:00","datePublished":"2017-09-10T15:09:55+02:00","description":"Visual Studio 2017 jest dostępny od marca tego roku. Ostatnio wyszła nowa, większa aktualizacja, 15.3, która mogła być interesująca. A jak wyszło? Zobaczmy. Przejdziemy przez ciekawsze nowości zarówno wersji podstawowej, jak i aktualizacji, które są ważne z punktu widzenia dewelopera Xamarina. Uściślę tylko, że mam tu na myśli normalnego Visual Studio, a nie Xamarin Studio na Maca, któremu zmieniono nazwę na Visual Studio for Mac. Jest to tylko zabieg marketingowy i program ten nie ma nic wspólnego z prawdziwym Visualem. Niestety wprowadza to trochę w błąd, zwłaszcza nowych użytkowników.","headline":"Nowości w Visual Studio 2017 i 15.3 z perspektywy Xamarina","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/09/10/nowosci-visual-studio-2017-15-3-perspektywy-xamarina/"},"url":"http://localhost:4000/2017/09/10/nowosci-visual-studio-2017-15-3-perspektywy-xamarina/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lazy Loading" /></head>
+<body><header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Lazy Loading</a>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="/external-articles/">Zewnętrzne artykuły</a><a class="page-link" href="/about/">O mnie</a></div>
+    </nav>
+  </div>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Nowości w Visual Studio 2017 i 15.3 z perspektywy Xamarina</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-09-10T15:09:55+02:00" itemprop="datePublished">Sep 10, 2017
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Tomasz Wiśniewski</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Visual Studio 2017 jest dostępny od marca tego roku. Ostatnio wyszła nowa, większa aktualizacja, 15.3, która mogła być interesująca. A jak wyszło? Zobaczmy. Przejdziemy przez ciekawsze nowości zarówno wersji podstawowej, jak i aktualizacji, które są ważne z punktu widzenia dewelopera Xamarina. Uściślę tylko, że mam tu na myśli normalnego Visual Studio, a nie Xamarin Studio na Maca, któremu zmieniono nazwę na Visual Studio for Mac. Jest to tylko zabieg marketingowy i program ten nie ma nic wspólnego z prawdziwym Visualem. Niestety wprowadza to trochę w błąd, zwłaszcza nowych użytkowników.</p>
+
+<h4 id="szybkość-uruchamiania-solucji">Szybkość uruchamiania solucji</h4>
+
+<p>Szybkość uruchamiania zarówno Visuala jak i solucji miały ulec znacznej poprawie. Szczerze to za bardzo tego nie odczułem. Być może wiąże to się z jakimiś specjalnymi przypadkami. Nie robiłem dokładnych pomiarów, ale <strong>znacznego, odczuwalnego przyspieszenia raczej nie ma</strong>.</p>
+
+<p>Jest jednak jedna ciekawa opcja, która nazywa się <strong>Lightweight solutions</strong>. Jeśli jest ona aktywna, to projekt z solucji ładuje się dopiero, gdy chcemy go użyć. Czyli np. gdy go rozwiniemy, żeby podejrzeć/edytować jakiś plik.</p>
+
+<h4 id="intellisense-w-xamlu-dla-xamarinforms">Intellisense w XAMLu dla Xamarin.Forms</h4>
+
+<p>W Visual Studio 2015 podpowiedzi w xamlu w projektach Xamarin.Forms nigdy mi nie chciały działać. W VS2017 zostało to w końcu poprawione i działają tak jak powinny. Zdawałoby się, że to podstawa, ale jednak musieliśmy na to trochę poczekać. Jednak ważne, że już jest 🙂</p>
+
+<p><img src="/wp-content/uploads/2017/08/vs2017_xaml_intellisense.png" alt="" /></p>
+
+<h4 id="zintegrowane-aktualizacje-dla-xamarina">Zintegrowane aktualizacje dla Xamarina</h4>
+
+<p>Ktoś w Microsofcie wpadł na pomysł, że dobrze będzie aktualizować Xamarina razem z Visual Studio. Teoretycznie nie powinno nam to robić zbyt wielkiej różnicy. Mi jednak robi, ponieważ od którejś aktualizacji Visual odmówił współpracy i aktualizacja zawsze kończyła się niepowodzeniem. Wtedy musiałem odinstalowywać Visuala i instalować go na nowo. I tak już od ładnych kilku aktualizacji.</p>
+
+<h4 id="run-to-click">Run to click</h4>
+
+<p>Od teraz podczas debugowania możemy wykonać kod do wskazanego miejsca i debugger zatrzyma się w nim bez stawiania breakpointa. Wystarczy, że klikniemy na zieloną strzałkę, która pojawia się na początku linii.</p>
+
+<p><img src="/wp-content/uploads/2017/08/vs2017_run_to_click.png" alt="" /></p>
+
+<p>Całkiem fajna opcja, jednak wydaje mi się, że musimy zbyt długo czekać, aż strzałka się pojawi. Jeśli ktoś działa szybko, to pewnie wygodniej będzie mu postawić breakpointa.</p>
+
+<h4 id="live-unit-testing">Live unit testing</h4>
+
+<p>Live unit testing to wykonywanie wszystkich testów w czasie rzeczywistym.</p>
+
+<p><img src="/wp-content/uploads/2017/08/vs2017_live_unit_testing.png" alt="" /></p>
+
+<p>[Źródło: <a href="https://docs.microsoft.com/en-us/visualstudio/ide/whats-new-in-visual-studio">docs.microsoft.com</a>]</p>
+
+<p>Super sprawa, widzimy, która ścieżka przechodzi, która nie, a która nie jest objęta żadnymi testami. Chciałem tu dodać własny zrzut ekranu, jednak gdy po 20 minutach Live Unit Testing nadal nie chciał mi działać, to dałem sobie spokój i dodałem zrzut z dokumentacji. Nie wiem czy popsuli to w aktualizacji, czy potrzebna jest tu inna magia, ale jakiś czas temu używałem tej funkcji bez problemu.</p>
+
+<h4 id="rozwiązywane-konfliktów-z-gita">Rozwiązywane konfliktów z gita</h4>
+
+<p>Mamy trochę lepszą obsługę gita. Gdy podczas merge’a pojawi się konflikt możemy go w łatwiejszy sposób obsłużyć w Visualu.</p>
+
+<p><img src="/wp-content/uploads/2017/08/vs2017_merge_conflict.png" alt="" /></p>
+
+<p>[Źródło: <a href="https://channel9.msdn.com/Events/Build/2017/B8104">The Future of C# (Build 2017)</a>]</p>
+
+<p>Mamy teraz dedykowane opcje do wybrania wersji naszej lub tej drugiej (lub obu). Być może kiedyś doczekamy się tak fajnego rozwiązania jakie mamy np. w PyCharm:</p>
+
+<p><img src="/wp-content/uploads/2017/08/pycharm_merge_conflict-1024x527.png" alt="" /></p>
+
+<p>[Źródło: <a href="https://www.jetbrains.com/help/pycharm/resolving-conflicts.html">Dokumentacja PyCharm</a>]</p>
+
+<h4 id="structure-visualizer">Structure Visualizer</h4>
+
+<p>Visual od teraz rysuje linie pomiędzy nawisami pomagające łatwiej odnaleźć się w kodzie.</p>
+
+<p><img src="/wp-content/uploads/2017/08/vs2017_structure_visualizer1.png" alt="" /></p>
+
+<p>Dodatkowo, gdy najedziemy na nawias kończący, zobaczymy co jest na jego początku, czyli np. definicję funkcji. Natomiast jeśli najedziemy na przerywaną linię, to zobaczymy pełną ścieżkę od początku namespace’a:</p>
+
+<p><img src="/wp-content/uploads/2017/08/vs2017_structure_visualizer2.png" alt="" /></p>
+
+<h4 id="find-all-references">Find All References</h4>
+
+<p>Find All References to opcja znajdująca się pod prawym przyciskiem myszy i w Visualu 2017 została odświeżona:</p>
+
+<p><img src="/wp-content/uploads/2017/08/vs2017_references.png" alt="" /></p>
+
+<p>Mamy tu teraz kolorowanie składni, które bardzo pomaga. Wcześniej opcji tej używało się raczej ciężko. Dodatkowo doszły też różnego rodzaju grupowania.</p>
+
+<h4 id="edytor-uprawnień">Edytor uprawnień</h4>
+
+<p>Zmiana, która pojawiła się w aktualizacji 15.3. Plik entitlements.plist, który jest używany przy projekcie Xamarin.iOS w końcu dostał swój edytor. Zawsze to wygodniej niż ręczne edytowanie xmla.</p>
+
+<p><img src="/wp-content/uploads/2017/08/vs2017_entitlements_editor.png" alt="" /></p>
+
+<h4 id="xamarin-live-player--brak">Xamarin Live Player – brak</h4>
+
+<p>Miałem nadzieję, że w aktualizacji 15.3 pojawi się Xamarin Live Player zapowiadany na Build 2017. Do tej pory znajdował się w wersji preview Visuala. Zespół jednak podjął decyzję, że dalej pozostanie on w wersji preview. Trochę szkoda, ale z drugiej strony pewnie chcą go dopracować. Także czekamy do następnej większej aktualizacji.</p>
+
+<h4 id="ogólne-wrażenia">Ogólne wrażenia</h4>
+
+<p>Visual Studio 2017 dostarczył nam kilku fajnych i usprawniających pracę nowości. Większość z wymienionych wyżej rzeczy jest na pewno na plus, z Intellisense dla xamla w Xamarin.Forms na czele. Aktualizacja 15.3 w kwestii Xamarina zmieniła raczej niewiele, chyba że są jakieś poprawki stabilności, których na pierwszy rzut oka nie widać. Czekałem na tę wersję, głównie ze względu na Xamarin Live Player. A czekać trzeba było znacznie dłużej niż na wcześniejsze aktualizacje (3 miesiące od 15.2, w porównaniu do 1 miesiąca pomiędzy 15.0 – 15.1 – 15.2). Dlatego też liczyłem na trochę więcej. Nawet jeśli nie nowe funkcje, to poprawki błędów.</p>
+
+<p>I skoro przy błędach jesteśmy. Martwi trochę jakość tego wydania. Jak wyżej wspominałem, przy każdej aktualizacji muszę reinstalować Visuala. Wczoraj przy debugowaniu projektu UWP, Visual zacinał się co pewien czas i odwieszał dopiero po kilku minutach. Deploy dla Androida nie zawsze wgrywa nową wersję aplikacji lub po prostu trwa w nieskończoność i konieczny jest rebuild lub usuwanie folderów bin/obj. Jest kilka takich mniejszych problemów z najróżniejszymi sprawami, które po pewnym czasie zaczynają mocniej przeszkadzać. Być może wraz ze startem wersji preview Microsoft zwolnił dział QA i liczą na zgłoszenia od ludzi 😉</p>
+
+  </div><a class="u-url" href="/2017/09/10/nowosci-visual-studio-2017-15-3-perspektywy-xamarina/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Lazy Loading</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Lazy Loading</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomwis"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomwis</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog o mobilnym programowaniu w C#</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Dlaczego moja strona w Xamarin.Forms nie jest niszczona? | Lazy Loading</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Dlaczego moja strona w Xamarin.Forms nie jest niszczona?" />
+<meta name="author" content="Tomasz Wiśniewski" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Być może zdarzyło wam się śledzić, czy nie macie wycieków pamięci podczas tworzenia aplikacji. W C# teoretycznie jest całkiem łatwo, bo mamy garbage collector, który sam powinien zadbać o czyszczenie już niepotrzebnych obiektów. Niestety czasami tak się nie dzieje i najczęściej jest to nasza wina – zwyczajnie zapomnimy usunąć referencje do naszego obiektu. Np. rejestrujemy zdarzenie, ale już nigdzie tej rejestracji nie usuwamy. Wtedy obiekt nie zostanie zniszczony i będzie zalegał w pamięci." />
+<meta property="og:description" content="Być może zdarzyło wam się śledzić, czy nie macie wycieków pamięci podczas tworzenia aplikacji. W C# teoretycznie jest całkiem łatwo, bo mamy garbage collector, który sam powinien zadbać o czyszczenie już niepotrzebnych obiektów. Niestety czasami tak się nie dzieje i najczęściej jest to nasza wina – zwyczajnie zapomnimy usunąć referencje do naszego obiektu. Np. rejestrujemy zdarzenie, ale już nigdzie tej rejestracji nie usuwamy. Wtedy obiekt nie zostanie zniszczony i będzie zalegał w pamięci." />
+<link rel="canonical" href="http://localhost:4000/2017/09/24/dlaczego-moja-strona-xamarin-forms-niszczona/" />
+<meta property="og:url" content="http://localhost:4000/2017/09/24/dlaczego-moja-strona-xamarin-forms-niszczona/" />
+<meta property="og:site_name" content="Lazy Loading" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-24T18:38:59+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Dlaczego moja strona w Xamarin.Forms nie jest niszczona?" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tomasz Wiśniewski"},"dateModified":"2017-09-24T18:38:59+02:00","datePublished":"2017-09-24T18:38:59+02:00","description":"Być może zdarzyło wam się śledzić, czy nie macie wycieków pamięci podczas tworzenia aplikacji. W C# teoretycznie jest całkiem łatwo, bo mamy garbage collector, który sam powinien zadbać o czyszczenie już niepotrzebnych obiektów. Niestety czasami tak się nie dzieje i najczęściej jest to nasza wina – zwyczajnie zapomnimy usunąć referencje do naszego obiektu. Np. rejestrujemy zdarzenie, ale już nigdzie tej rejestracji nie usuwamy. Wtedy obiekt nie zostanie zniszczony i będzie zalegał w pamięci.","headline":"Dlaczego moja strona w Xamarin.Forms nie jest niszczona?","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/09/24/dlaczego-moja-strona-xamarin-forms-niszczona/"},"url":"http://localhost:4000/2017/09/24/dlaczego-moja-strona-xamarin-forms-niszczona/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lazy Loading" /></head>
+<body><header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Lazy Loading</a>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="/external-articles/">Zewnętrzne artykuły</a><a class="page-link" href="/about/">O mnie</a></div>
+    </nav>
+  </div>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Dlaczego moja strona w Xamarin.Forms nie jest niszczona?</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-09-24T18:38:59+02:00" itemprop="datePublished">Sep 24, 2017
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Tomasz Wiśniewski</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Być może zdarzyło wam się śledzić, czy nie macie wycieków pamięci podczas tworzenia aplikacji. W C# teoretycznie jest całkiem łatwo, bo mamy garbage collector, który sam powinien zadbać o czyszczenie już niepotrzebnych obiektów. Niestety czasami tak się nie dzieje i najczęściej jest to nasza wina – <strong>zwyczajnie zapomnimy usunąć referencje do naszego obiektu</strong>. Np. rejestrujemy zdarzenie, ale już nigdzie tej rejestracji nie usuwamy. Wtedy obiekt nie zostanie zniszczony i będzie zalegał w pamięci.</p>
+
+<p>Jednak jeśli chodzi o Xamarin.Forms to nie zawsze jest to takie oczywiste. Jest to nadal młody framework, a jak to z nowościami bywa – jest w nich sporo błędów. Nie jestem pewien czy sytuacja, którą teraz opiszę to błąd, czy może świadoma decyzja, ale jednak warto o niej wiedzieć.</p>
+
+<h4 id="zachowanie-navigationpage">Zachowanie NavigationPage</h4>
+
+<p>W Xamarin.Forms mamy wbudowaną nawigację. Aby jej używać musimy opakować naszą stronę w <code class="language-plaintext highlighter-rouge">NavigationPage</code>. Potem możemy używać takich metod jak <code class="language-plaintext highlighter-rouge">PushAsync</code>, czy <code class="language-plaintext highlighter-rouge">PopAsync</code>. Gdy przechodzimy do nowej strony za pomocą <code class="language-plaintext highlighter-rouge">PushAsync</code> to poprzednia pozostaje w <code class="language-plaintext highlighter-rouge">NagivationStack</code>. Gdy wracamy z nowej strony do poprzedniej za pomocą <code class="language-plaintext highlighter-rouge">PopAsync</code> to nowa strona jest usuwana z <code class="language-plaintext highlighter-rouge">NavigationStack</code>. Gdy nie trzymamy do niej żadnych dodatkowych referencji to oczekiwalibyśmy, że strona ta zostanie zniszczona. Tak się jednak nie stanie, ponieważ <code class="language-plaintext highlighter-rouge">NavigationPage</code> trzyma referencję do ostatniej strony, którą wyrzucił z <code class="language-plaintext highlighter-rouge">NavigationStack</code> za pomocą <code class="language-plaintext highlighter-rouge">PopAsync</code>. W takiej sytuacji strona ta nigdy nie zostanie zniszczona, jeśli nie wykonamy operacji nawigacji jeszcze raz – czy to <code class="language-plaintext highlighter-rouge">PushAsync</code>, czy <code class="language-plaintext highlighter-rouge">PopAsync</code>.</p>
+
+<p>Aby to lepiej zrozumieć spójrzmy do kodu źródłowego Xamarin.Forms:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/6b734c39433b26e5b32cfbf76d33df40.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/6b734c39433b26e5b32cfbf76d33df40).</noscript></div>
+<p>Metoda <code class="language-plaintext highlighter-rouge">PopAsync</code> działa na właściwości <code class="language-plaintext highlighter-rouge">CurrentNavigationTask</code>. W linijkach 17-18 widzimy, że jest tam zapisywany <code class="language-plaintext highlighter-rouge">Task&lt;Page&gt;</code>, czyli nasza usuwana strona. Właściwość ta zostanie nadpisana dopiero przy ponownym wywołaniu metody <code class="language-plaintext highlighter-rouge">PopAsync</code> lub przy wywołaniu <code class="language-plaintext highlighter-rouge">PushAsync</code>, gdzie w linijce 28 lub 36 również nadpisujemy tę właściwość.</p>
+
+<p>Zachowanie to łatwiej zauważyć na Windowsie i iOS, które zazwyczaj usuwają dany obiekt w miarę szybko. Android często zwleka z tym zadaniem, bo niczego się nie boi i lubi zaglądać OutOfMemoryException w oczy 😉</p>
+
+<h4 id="jak-sobie-z-tym-poradzić">Jak sobie z tym poradzić?</h4>
+
+<p>Może to nie mieć znaczenia. Jeśli nasze strony są małe i często nawigujemy, to pewnie nawet tego nie zauważymy. Ale jeśli aplikacja zbudowana jest tylko z kilku dużych stron, to może się to czasami okazać problematyczne. Nie jest to duży problem, ale warto mieć to na uwadze, używając wbudowanej nawigacji. Najczęściej nic nie trzeba z tym robić, ale w razie gdybyśmy chcieli temu zaradzić, to jednym z rozwiązań jest napisanie własnej nawigacji.</p>
+
+  </div><a class="u-url" href="/2017/09/24/dlaczego-moja-strona-xamarin-forms-niszczona/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Lazy Loading</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Lazy Loading</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomwis"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomwis</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog o mobilnym programowaniu w C#</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

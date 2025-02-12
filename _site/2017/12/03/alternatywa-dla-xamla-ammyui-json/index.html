@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Alternatywa dla XAMLa - AmmyUI i json | Lazy Loading</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Alternatywa dla XAMLa - AmmyUI i json" />
+<meta name="author" content="Tomasz Wiśniewski" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Jakiś czas temu zastanawiałem się dlaczego tak właściwie Microsoft postawił na styl xml jako język opisu warstwy UI dla aplikacji. Czy coś prostszego nie byłoby lepsze? Obecnie ciągle używa się jsona zamiast xmla i wszyscy chwalą sobie to rozwiązanie. Dlaczego więc nie spróbować by tego samego z opisem UI? Podobne pytanie można by postawić także odnośnie axml z Androida." />
+<meta property="og:description" content="Jakiś czas temu zastanawiałem się dlaczego tak właściwie Microsoft postawił na styl xml jako język opisu warstwy UI dla aplikacji. Czy coś prostszego nie byłoby lepsze? Obecnie ciągle używa się jsona zamiast xmla i wszyscy chwalą sobie to rozwiązanie. Dlaczego więc nie spróbować by tego samego z opisem UI? Podobne pytanie można by postawić także odnośnie axml z Androida." />
+<link rel="canonical" href="http://localhost:4000/2017/12/03/alternatywa-dla-xamla-ammyui-json/" />
+<meta property="og:url" content="http://localhost:4000/2017/12/03/alternatywa-dla-xamla-ammyui-json/" />
+<meta property="og:site_name" content="Lazy Loading" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-12-03T12:46:41+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Alternatywa dla XAMLa - AmmyUI i json" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tomasz Wiśniewski"},"dateModified":"2017-12-03T12:46:41+01:00","datePublished":"2017-12-03T12:46:41+01:00","description":"Jakiś czas temu zastanawiałem się dlaczego tak właściwie Microsoft postawił na styl xml jako język opisu warstwy UI dla aplikacji. Czy coś prostszego nie byłoby lepsze? Obecnie ciągle używa się jsona zamiast xmla i wszyscy chwalą sobie to rozwiązanie. Dlaczego więc nie spróbować by tego samego z opisem UI? Podobne pytanie można by postawić także odnośnie axml z Androida.","headline":"Alternatywa dla XAMLa - AmmyUI i json","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/12/03/alternatywa-dla-xamla-ammyui-json/"},"url":"http://localhost:4000/2017/12/03/alternatywa-dla-xamla-ammyui-json/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lazy Loading" /></head>
+<body><header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Lazy Loading</a>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="/external-articles/">Zewnętrzne artykuły</a><a class="page-link" href="/about/">O mnie</a></div>
+    </nav>
+  </div>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Alternatywa dla XAMLa - AmmyUI i json</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-12-03T12:46:41+01:00" itemprop="datePublished">Dec 3, 2017
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Tomasz Wiśniewski</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Jakiś czas temu zastanawiałem się dlaczego tak właściwie Microsoft postawił na styl xml jako język opisu warstwy UI dla aplikacji. Czy coś prostszego nie byłoby lepsze? Obecnie ciągle używa się jsona zamiast xmla i wszyscy chwalą sobie to rozwiązanie. Dlaczego więc nie spróbować by tego samego z opisem UI? Podobne pytanie można by postawić także odnośnie axml z Androida.</p>
+
+<p>Okazuje się, że nie tylko ja nad tym myślałem (niemożliwe ;)). Pewien czas po tych rozważaniach trafiłem zupełnie przypadkiem na AmmyUI. Jest to nowy sposób opisu warstwy UI dla aplikacji używających XAML, a więc WPF, UWP i Xamarin.Forms (oraz NoesisGUI, ale niestety pierwszy raz o tym słyszę). Język ten bazuje na jsonie i zastępuje UI w XAMLu.</p>
+
+<p>W ramach wypróbowania AmmyUI stworzyłem prostą aplikację w Xamarin.Forms (właściwie bardziej jednostronne UI):</p>
+
+<p><img src="/wp-content/uploads/2017/10/ammyui_example1_1-576x1024.png" alt="" /></p>
+
+<p>Link do niej znajduje się na końcu posta.</p>
+
+<p>Zobaczmy teraz jak wygląda AmmyUI.</p>
+
+<h4 id="podstawowy-wygląd">Podstawowy wygląd</h4>
+
+<p>Porównajmy sobie jak prezentuje się AmmyUI w stosunku do xamla:</p>
+
+<p>XAML:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/fd438a966c79d08ae4aec908d809065d.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/fd438a966c79d08ae4aec908d809065d).</noscript></div>
+<p>AmmyUI:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/f1292baec7de4e642e1aae958014c01b.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/f1292baec7de4e642e1aae958014c01b).</noscript></div>
+<p>Github niestety nie ma kolorowania składni dla ammy, ale w Visual Studio nie ma już z tym większego problemu:</p>
+
+<p><img src="/wp-content/uploads/2017/10/ammyui1.png" alt="" /></p>
+
+<p>Mógłbym się jedynie przyczepić, że kolory nie są najlepiej dobrane pod ciemny motyw, ale to raczej drobnostka, którą łatwo poprawić. Jak widzimy, taka składnia sprawia, że plik jest krótszy niż gdybyśmy pisali go w xamlu. Wiele innych rzeczy również jest uproszczona, np. aby zdefiniować wiersze w kontrolce <code class="language-plaintext highlighter-rouge">Grid</code> wystarczy napisać:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/d4e9f2b47600f995e6993f6543c33d59.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/d4e9f2b47600f995e6993f6543c33d59).</noscript></div>
+<p>W gridzie definiujemy zaledwie <code class="language-plaintext highlighter-rouge">#TwoRows</code> razem z wysokością każdego wiersza, a następne w kontrolce piszemy <code class="language-plaintext highlighter-rouge">#Cell</code> i podajemy wiersz oraz kolumnę. Przy okazji <code class="language-plaintext highlighter-rouge">#TwoRows</code> przejdziemy do kolejnej funkcjonalności – mixins.</p>
+
+<h4 id="mixins">Mixins</h4>
+
+<p>Z tym <code class="language-plaintext highlighter-rouge">#TwoRows</code> to trochę oszustwo – bowiem nie moglibyśmy zrobić tego dla dowolnej liczby wierszy. Jest to mixin, czyli coś w rodzaju funkcji, która może przyjmować parametry i zwraca właściwości obiektów. Jest on już zdefiniowany przez twórcę, więc jest to dla nas taki skrót, ale możemy bez problemu tworzyć własne mixiny. Zobaczmy jak zdefiniowany jest mixin <code class="language-plaintext highlighter-rouge">TwoRows</code>:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/b242b71d02bf3281ea113702fa696deb.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/b242b71d02bf3281ea113702fa696deb).</noscript></div>
+<p>Mamy tutaj nazwy znane z xamla – kolekcję <code class="language-plaintext highlighter-rouge">RowDefinitions</code> i poszczególne definicje wierszy zawarte w nawiasie klamrowym, tak jak kolekcje w jsonie. Później mixinów używamy z hashem # na początku.</p>
+
+<h4 id="bindowania-resourcey-i-konwertery">Bindowania, resource’y i konwertery</h4>
+
+<p>Bindowania mają trochę skróconą formę ze słówkiem <code class="language-plaintext highlighter-rouge">bind</code>. Statycznych resource’ów możemy używać ze słówkiem <code class="language-plaintext highlighter-rouge">resource</code>, a więc możemy np. trzymać resource’y w <code class="language-plaintext highlighter-rouge">App.xaml</code> w xamlu i używać ich na stronie z Ammy. Składnia <code class="language-plaintext highlighter-rouge">resource dyn</code> pomaga nam z dynamicznymi resource’ami. Ale możemy je też definiować w ammy. Przykładowo tak to wygląda z kolorami:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/dcc11fb5d69d5c0784c8cc0b30a3b472.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/dcc11fb5d69d5c0784c8cc0b30a3b472).</noscript></div>
+<p>Trochę krócej niż z użyciem xamla, prawda?</p>
+
+<p>Ciekawą sprawą są tutaj konwertery, bowiem możemy pisać je bezpośrednio na stronie z ammy, używając C# lub odwołać się do jakiejś funkcji. Przykładowo:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/ebd9822f166e4759437400e9aa7bdfb8.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/ebd9822f166e4759437400e9aa7bdfb8).</noscript></div>
+<p>Używamy słówka <code class="language-plaintext highlighter-rouge">convert</code> przy bindowaniu, a dalej mamy coś w rodzaju wyrażenia lambda. Wydaje mi się to całkiem pomocne, bo czasami zdarza się pisać naprawdę proste konwertery, np. do odwrócenia boola. To trochę ułatwia zadanie.</p>
+
+<p>Zwróćmy też uwagę na importowanie namespace’a za pomocą słowa <code class="language-plaintext highlighter-rouge">using</code> – dokładnie jak w C# (tylko bez średnika na końcu). Jest to sporo prostsze niż to co musimy robić w xamlu.</p>
+
+<h4 id="czytelność">Czytelność</h4>
+
+<p>Obawiałem się trochę jak będzie z czytelnością przy większych plikach i bardziej zagnieżdżonych strukturach. Nie jest jednak źle. Pomaga tutaj zdecydowanie dodawanie do końcowej klamry informacji o tym, do której kontrolki dana klamra należy:</p>
+
+<p><a href="/wp-content/uploads/2017/10/ammyui2_light.png"><img src="/wp-content/uploads/2017/10/ammyui2_light-1024x657.png" alt="" /></a></p>
+
+<p>Miłym akcentem jest też pokazywanie koloru jako podkreślenia wartości hexowej jak np. w <code class="language-plaintext highlighter-rouge">BackgroundColor</code> – tutaj niestety niewiele widać, bo jest to prawie biały 🙂</p>
+
+<h4 id="live-coding">Live coding</h4>
+
+<p>To jest jeden z największych plusów AmmyUI – widzimy podgląd UI na żywo w emulatorze. Nie mamy tu okienka do podglądu UI w Visual Studio, tylko widzimy wszystko w działającej aplikacji. Gdy zmieniamy tło, zapisujemy plik i tło zmienia się w aplikacji. W międzyczasie możemy sobie chodzić po aplikacji, klikać, itd. i podgląd na żywo cały czas działa. Można to robić z podłączonym debuggerem lub nie.</p>
+
+<p>A jeśli zrobimy jakiś błąd w kodzie ui, to w aplikacji pojawi się błąd. W moim przypadku był dosyć czytelny, mam nadzieję, że zawsze tak jest:</p>
+
+<p><img src="/wp-content/uploads/2017/10/ammy_error1.png" alt="" /></p>
+
+<p>Cudowna sprawa. Budowanie i deploy aplikacji Xamarina czasami trwa długo i taka funkcjonalność może znacznie przyczynić się do szybkości kodowania UI.</p>
+
+<h4 id="konwerter-z-xamla">Konwerter z Xamla</h4>
+
+<p>Jeśli mamy już napisaną aplikację, to istnieje konwerter, który przekształci nasz projekt na ammy. Możemy też przekonwertować pojedyncze pliki. Ciekawy jestem jak dobrze radzi sobie ten konwerter. Jeśli to sprawdzę, to postaram się napisać posta o problemach, które można napotkać.</p>
+
+<h4 id="problemy-z-xamarinforms">Problemy z Xamarin.Forms</h4>
+
+<p>Dla Xamarin.Forms AmmyUI jest niestety na razie w becie. Szybko to odczułem, bowiem nie dałem rady uruchomić aplikacji na symulatorze iOS. Android i UWP działają w porządku. Mam nadzieję, że z czasem zostanie to poprawione, bo bez tego nie za bardzo da się używać Ammy w Formsach.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Nie pokazywałem tu wszystkich możliwości AmmyUI. Twórcy twierdzą, że da się tu zrobić wszystko to co w xamlu. Jest to produkt całkowicie darmowy i open-source.</p>
+
+<p>Pierwsze wrażenie jakie wywarło na mnie AmmyUI jest bardzo dobre. Wygląda na to, że tworzenie UI jest w nim łatwiejsze niż w Xamlu, zwłaszcza że mamy całkiem dobre podpowiedzi – powiedziałbym, że lepsze niż w xamlu dla Xamarin.Forms. Jednak, spodziewam się, że w bardziej rozbudowanych projektach mogą pojawiać się problemy. W końcu jest to dosyć młody projekt. Mam nadzieję, że będzie dalej rozwijany i zyska trochę na popularności.</p>
+
+<p>Link do mojej testowej aplikacji: <a href="https://github.com/tomwis/AmmyUIExample">https://github.com/tomwis/AmmyUIExample</a></p>
+
+<p>Link do oficjalnej strony: <a href="http://www.ammyui.com">http://www.ammyui.com</a></p>
+
+<p>Zachęcam do obejrzenia filmików na oficjalnej stronie, które dobrze pokazują możliwości AmmyUI.</p>
+
+  </div><a class="u-url" href="/2017/12/03/alternatywa-dla-xamla-ammyui-json/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Lazy Loading</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Lazy Loading</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomwis"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomwis</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog o mobilnym programowaniu w C#</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

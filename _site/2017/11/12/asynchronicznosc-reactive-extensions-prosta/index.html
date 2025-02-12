@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Asynchroniczność z Reactive Extensions jest bardzo prosta | Lazy Loading</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Asynchroniczność z Reactive Extensions jest bardzo prosta" />
+<meta name="author" content="Tomasz Wiśniewski" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Dzisiaj chciałbym zrobić krótki wstęp do Reactive Extensions. Sam dopiero zapoznaję się z tym tematem, dlatego też znam tylko podstawowy tej biblioteki. Wygląda ona jednak bardzo zachęcająco. W pewnych okolicznościach potrafi bardzo uprościć kod, a więc i skrócić czas potrzebny na jego pisanie oraz późniejsze utrzymywanie." />
+<meta property="og:description" content="Dzisiaj chciałbym zrobić krótki wstęp do Reactive Extensions. Sam dopiero zapoznaję się z tym tematem, dlatego też znam tylko podstawowy tej biblioteki. Wygląda ona jednak bardzo zachęcająco. W pewnych okolicznościach potrafi bardzo uprościć kod, a więc i skrócić czas potrzebny na jego pisanie oraz późniejsze utrzymywanie." />
+<link rel="canonical" href="http://localhost:4000/2017/11/12/asynchronicznosc-reactive-extensions-prosta/" />
+<meta property="og:url" content="http://localhost:4000/2017/11/12/asynchronicznosc-reactive-extensions-prosta/" />
+<meta property="og:site_name" content="Lazy Loading" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-11-12T11:48:39+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Asynchroniczność z Reactive Extensions jest bardzo prosta" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tomasz Wiśniewski"},"dateModified":"2017-11-12T11:48:39+01:00","datePublished":"2017-11-12T11:48:39+01:00","description":"Dzisiaj chciałbym zrobić krótki wstęp do Reactive Extensions. Sam dopiero zapoznaję się z tym tematem, dlatego też znam tylko podstawowy tej biblioteki. Wygląda ona jednak bardzo zachęcająco. W pewnych okolicznościach potrafi bardzo uprościć kod, a więc i skrócić czas potrzebny na jego pisanie oraz późniejsze utrzymywanie.","headline":"Asynchroniczność z Reactive Extensions jest bardzo prosta","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/11/12/asynchronicznosc-reactive-extensions-prosta/"},"url":"http://localhost:4000/2017/11/12/asynchronicznosc-reactive-extensions-prosta/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lazy Loading" /></head>
+<body><header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Lazy Loading</a>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="/external-articles/">Zewnętrzne artykuły</a><a class="page-link" href="/about/">O mnie</a></div>
+    </nav>
+  </div>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Asynchroniczność z Reactive Extensions jest bardzo prosta</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-11-12T11:48:39+01:00" itemprop="datePublished">Nov 12, 2017
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Tomasz Wiśniewski</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Dzisiaj chciałbym zrobić krótki wstęp do <a href="http://reactivex.io">Reactive Extensions</a>. Sam dopiero zapoznaję się z tym tematem, dlatego też znam tylko podstawowy tej biblioteki. Wygląda ona jednak bardzo zachęcająco. W pewnych okolicznościach potrafi bardzo uprościć kod, a więc i skrócić czas potrzebny na jego pisanie oraz późniejsze utrzymywanie.</p>
+
+<h4 id="czym-są-reactive-extensions">Czym są Reactive Extensions?</h4>
+
+<p>Najprościej mówiąc, Reactive Extensions (czy w skrócie – Rx) to biblioteka, która umożliwia nam pisanie reaktywnych aplikacji, czyli takich, które nasłuchują na zmiany i same odświeżają np. UI, a nie odpytują o zmiany co pewien czas (np. bazę danych, czy jakąś usługę). Mamy tu 3 składniki:</p>
+
+<ul>
+  <li>Dane wejściowe z jakiegoś zdarzenia, które są traktowane jako strumień danych (Observable)</li>
+  <li>LINQ za pomocą którego możemy wykonywać różne operacje na tym strumieniu (jest to bardziej rozbudowania wersja LINQ z bardzo fajnymi możliwościami)</li>
+  <li>Subskrypcje, w których dostajemy dane i możemy z nimi coś zrobić</li>
+</ul>
+
+<p>Koncept tego rozwiązania jest niby prosty, ale na początku może być ciężko zrozumieć, w czym to pomaga i w jakich sytuacjach może się to przydać. Tak naprawdę opieramy się tu na zdarzeniach, dlaczego więc po prostu nie użyć zwykłych zdarzeń?</p>
+
+<h4 id="w-czym-nam-to-pomaga">W czym nam to pomaga?</h4>
+
+<ol>
+  <li>Przeznaczeniem Rx jest pracowanie ze strumieniami danych, więc jeśli mamy taki scenariusz, to możemy znacznie uprościć kod. Jeśli nie, to być może niekoniecznie powinniśmy go używać.</li>
+  <li>Rx nie ogranicza się do prostych zdarzeń. W postaci strumienia można przedstawić też inne rzeczy, np. możemy nasłuchiwać na wyniki z usługi.</li>
+  <li>W prosty sposób możemy filtrować przychodzące wartości za pomocą LINQ.</li>
+  <li>Możemy wykonywać różne operacje na strumieniach, jak łączenie kilku strumieni w jeden (na różne sposoby).</li>
+</ol>
+
+<h4 id="przykład">Przykład</h4>
+
+<p>Dobrym przykładem będzie praca z danymi wprowadzanymi przez użytkownika, np. przy wyszukiwaniu. Użytkownik wpisuje w wyszukiwarce nazwę filmu, my nasłuchujemy na zdarzenie zmiany zawartości pola tekstowego, odpytujemy pewną usługę o nazwy filmów i prezentujemy wyniki dla użytkownika. Na jakie problemy się tutaj natkniemy?</p>
+
+<ul>
+  <li>Użytkownicy często piszą szybko. Nie chcielibyśmy więc wysyłać zapytania dla każdej dodanej literki, tylko po pewnym czasie gdy użytkownik przestał już pisać.</li>
+  <li>Nie chcemy wyszukiwać filmów od razu, po jednej literce, bo otrzymalibyśmy ogromną liczbę wyników. Lepiej jest poczekać i zacząć wyszukiwać np. gdy mamy już wpisane 3 litery.</li>
+  <li>Jeśli działamy z usługą internetową, a w dzisiejszych czasach tak prawdopodobnie będzie, to mogą zdarzać się opóźnienia. Możliwe jest, że wyślemy zapytanie, użytkownik zmieni tekst, wyślemy kolejne zapytanie z nowym tekstem, nowy wynik zostanie zwrócony, a starsze zapytanie miało z jakiegoś powodu duże opóźnienie i przyszło jeszcze później. W takim wypadku wyświetlimy użytkownikowi złe wyniki (wyniki od poprzedniego zapytania). Chcielibyśmy więc, żeby wyniki przychodziły w takiej kolejności w jakiej wysyłaliśmy zapytania.</li>
+</ul>
+
+<p>Napisanie kodu, który obsłuży powyższe scenariusze zajęłoby trochę czasu (i miejsca). Z Reactive Extensions taki kod zajmuje 7 linijek. Ale po kolei.</p>
+
+<h4 id="trochę-kodu">Trochę kodu</h4>
+
+<p>Użyjemy tutaj Xamarin.Forms. Żeby skorzystać z Rx musimy zainstalować paczkę z nugeta <a href="https://www.nuget.org/packages/System.Reactive/">System.Reactive</a>. Tworzymy sobie kontrolę <code class="language-plaintext highlighter-rouge">Entry</code> z nazwą <code class="language-plaintext highlighter-rouge">searchEntry</code>. Następnie podłączamy się do zdarzenia <code class="language-plaintext highlighter-rouge">TextChanged</code> i nasłuchujemy na nie za pomocą <code class="language-plaintext highlighter-rouge">Observable.FromEventPattern</code>. Stworzy nam to kolekcję <code class="language-plaintext highlighter-rouge">IObservable</code>, na których to kolekcjach opiera się całe Rx. Na takiej kolekcji możemy używać LINQ jak w tym fragmencie:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/0a15835206b4c9e60c31528287a5ec90.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/0a15835206b4c9e60c31528287a5ec90).</noscript></div>
+<p>Używamy tutaj <code class="language-plaintext highlighter-rouge">Select</code>, gdzie wywołujemy metodę <code class="language-plaintext highlighter-rouge">GetMovies</code>, która jest asynchroniczna i przekazujemy do niej tekst z kontrolki. Następnie subskrybujemy do tej kolekcji, a gdy dostaniemy wyniki, to wyświetlamy je w kontrolce <code class="language-plaintext highlighter-rouge">Label</code>, z nazwą <code class="language-plaintext highlighter-rouge">searchResults</code>. To chyba najprostszy przykład. Jak na razie nie ma tu nic niezwykłego. Dodajmy tu kilka elementów, o których wspominałem wyżej:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/c8e8d2ac7e45d5d55449d6f3dcb5f2fc.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/c8e8d2ac7e45d5d55449d6f3dcb5f2fc).</noscript></div>
+<p>Dodaliśmy tutaj <code class="language-plaintext highlighter-rouge">Where</code>, żeby wyszukiwanie zaczynało się od 3 znaków. Następnie mamy <code class="language-plaintext highlighter-rouge">Throttle</code>. Jest to specjalna metoda LINQ z Reactive Extensions. Dzięki niej możemy ograniczyć ilość zapytań. Jeśli użytkownik wpisuje nowe litery szybko, to tylko ostatni wynik w danych 500 milisekundach zostanie przekazany dalej (do usługi, która wyszukuje filmy). Po <code class="language-plaintext highlighter-rouge">Select</code> korzystamy z metody <code class="language-plaintext highlighter-rouge">Concat</code>. Zapewnia nam ona to, że wyniki przyjdą nam w takiej kolejności, w jakiej wysyłane były zapytania. I ostatnia metoda, <code class="language-plaintext highlighter-rouge">ObserveOn</code>, jest potrzebna do ustalenia wątku, tak żebyśmy w <code class="language-plaintext highlighter-rouge">Subscribe</code> mogli dopisać tekst do kontroli na wątku UI.</p>
+
+<p>Ściągnijcie sobie aplikację, do której link jest na końcu posta i przetestujcie to sami. W konfiguracji <code class="language-plaintext highlighter-rouge">Debug</code> możecie zobaczyć gotowe rozwiązanie zgodne z powyższymi wytycznymi. Metoda <code class="language-plaintext highlighter-rouge">GetMovies</code> ma wbudowane losowe, małe opóźnienie, więc wyniki nie będą natychmiastowe.</p>
+
+<p>Możecie też przestawić konfigurację na <code class="language-plaintext highlighter-rouge">Debug2</code>. Tutaj ładujemy rozwiązanie bez metody <code class="language-plaintext highlighter-rouge">Concat</code>. Gdy będziecie wpisywać znaki do pola tekstowego możecie podejrzeć w <code class="language-plaintext highlighter-rouge">Outpucie</code> w jakiej kolejności przychodzą wyniki – wyniki tutaj to ten sam tekst, który wpisujecie. Zauważycie, że czasami nie będą w poprawnej kolejności (gdy wpisujecie coś bardzo szybko). Możecie przejść do metody <code class="language-plaintext highlighter-rouge">InitRxNoConcat</code> w pliku MainPage.xaml.cs w projekcie PCL. Tam można zakomentować metodę <code class="language-plaintext highlighter-rouge">SelectMany</code> i odkomentować <code class="language-plaintext highlighter-rouge">Select</code> i <code class="language-plaintext highlighter-rouge">Concat</code> – po tej operacji wyniki powinny zawsze przychodzić w poprawnej kolejności. Zauważycie pewnie jednak w <code class="language-plaintext highlighter-rouge">Outpucie</code>, że trwa to dłużej – w końcu czasami musimy poczekać, tak żeby przestawić wyniki w dobrej kolejności.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Reactive Extensions nie jest nowością, jest już z nami od wielu lat i niektórzy na pewno dobrze je znają. Mam jednak wrażenie, że biblioteka ta nie jest znana wystarczająco dobrze i nie jest zbyt chętnie używana. Wydaje mi się, że może to być spowodowane dużym progiem wejścia. Trzeba tu bowiem trochę przestawić swój sposób myślenia, tak żeby zrozumieć jak działają strumienie w Rx i jakie jest ich zadanie. Po początkowym zapoznaniu się z tą biblioteką uważam, że warto jej się bliżej przyjrzeć. Może ona znacznie uprościć kod w pewnych sytuacjach. Dodatkowo, dla .neta, w tym i Xamarina, dostępny jest framework MVVM <a href="https://reactiveui.net">ReactiveUI</a>, który opiera się na Rx. Co więcej, można go łączyć z innymi framworkami MVVM, jak np. MvvmCross. Dzięki temu, możemy wykorzystywać go tylko w niektórych sytuacjach, tam gdzie jest potrzebny. A w innych dalej opieramy się na zwykłym MVVM.</p>
+
+<p>Przykładowa aplikacji: <a href="https://github.com/tomwis/RxExample">https://github.com/tomwis/RxExample</a></p>
+
+<p>Przykłady dla Rx: <a href="http://rxwiki.wikidot.com/101samples">http://rxwiki.wikidot.com/101samples</a></p>
+
+  </div><a class="u-url" href="/2017/11/12/asynchronicznosc-reactive-extensions-prosta/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Lazy Loading</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Lazy Loading</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomwis"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomwis</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog o mobilnym programowaniu w C#</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

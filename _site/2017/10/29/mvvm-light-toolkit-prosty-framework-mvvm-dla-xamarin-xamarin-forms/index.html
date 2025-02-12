@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>MVVM Light Toolkit - prosty framework MVVM dla Xamarin i Xamarin.Forms | Lazy Loading</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="MVVM Light Toolkit - prosty framework MVVM dla Xamarin i Xamarin.Forms" />
+<meta name="author" content="Tomasz Wiśniewski" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Wcześniej pisałem już o dwóch frameworkach do MVVM – FreshMvvm i MvvmCross. Dzisiaj przyjrzę się możliwościom Mvvm Light Toolkit. Jest to jeden ze starszych i pewnie jeden z bardziej znanych frameworków do MVVM. Przed Xamarinem był częstym wyborem (przynajmniej moim, ale pewnie też wielu innych osób) w WPF i Windows Phone’ie." />
+<meta property="og:description" content="Wcześniej pisałem już o dwóch frameworkach do MVVM – FreshMvvm i MvvmCross. Dzisiaj przyjrzę się możliwościom Mvvm Light Toolkit. Jest to jeden ze starszych i pewnie jeden z bardziej znanych frameworków do MVVM. Przed Xamarinem był częstym wyborem (przynajmniej moim, ale pewnie też wielu innych osób) w WPF i Windows Phone’ie." />
+<link rel="canonical" href="http://localhost:4000/2017/10/29/mvvm-light-toolkit-prosty-framework-mvvm-dla-xamarin-xamarin-forms/" />
+<meta property="og:url" content="http://localhost:4000/2017/10/29/mvvm-light-toolkit-prosty-framework-mvvm-dla-xamarin-xamarin-forms/" />
+<meta property="og:site_name" content="Lazy Loading" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-10-29T15:44:53+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="MVVM Light Toolkit - prosty framework MVVM dla Xamarin i Xamarin.Forms" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tomasz Wiśniewski"},"dateModified":"2017-10-29T15:44:53+01:00","datePublished":"2017-10-29T15:44:53+01:00","description":"Wcześniej pisałem już o dwóch frameworkach do MVVM – FreshMvvm i MvvmCross. Dzisiaj przyjrzę się możliwościom Mvvm Light Toolkit. Jest to jeden ze starszych i pewnie jeden z bardziej znanych frameworków do MVVM. Przed Xamarinem był częstym wyborem (przynajmniej moim, ale pewnie też wielu innych osób) w WPF i Windows Phone’ie.","headline":"MVVM Light Toolkit - prosty framework MVVM dla Xamarin i Xamarin.Forms","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/10/29/mvvm-light-toolkit-prosty-framework-mvvm-dla-xamarin-xamarin-forms/"},"url":"http://localhost:4000/2017/10/29/mvvm-light-toolkit-prosty-framework-mvvm-dla-xamarin-xamarin-forms/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lazy Loading" /></head>
+<body><header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Lazy Loading</a>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="/external-articles/">Zewnętrzne artykuły</a><a class="page-link" href="/about/">O mnie</a></div>
+    </nav>
+  </div>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">MVVM Light Toolkit - prosty framework MVVM dla Xamarin i Xamarin.Forms</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-10-29T15:44:53+01:00" itemprop="datePublished">Oct 29, 2017
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Tomasz Wiśniewski</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Wcześniej pisałem już o dwóch frameworkach do MVVM – <a href="/2017/09/03/freshmvvm-lekki-framework-mvvm-dla-xamarin-forms/">FreshMvvm</a> i <a href="/2017/10/01/mvvmcross-rozbudowany-framework-mvvm-dla-xamarin-xamarin-forms/">MvvmCross</a>. Dzisiaj przyjrzę się możliwościom Mvvm Light Toolkit. Jest to jeden ze starszych i pewnie jeden z bardziej znanych frameworków do MVVM. Przed Xamarinem był częstym wyborem (przynajmniej moim, ale pewnie też wielu innych osób) w WPF i Windows Phone’ie.</p>
+
+<p>Do zaprezentowania Mvvm Light stworzyłem, podobnie jak przy poprzednich frameworkach, prostą aplikację do budżetu i na jej podstawie będę opisywał funkcjonalności (link do kodu na końcu).</p>
+
+<h4 id="funkcjonalności">Funkcjonalności</h4>
+
+<p>Mvvm Light Toolkit to dość lekka biblioteka, podobnie jak FreshMvvm. Posiada tylko podstawowe funkcjonalności:</p>
+
+<ul>
+  <li>Zaimplementowane INotifyPropertyChanged w view modelach</li>
+  <li>Wbudowana implementacja ICommand – RelayCommand</li>
+  <li>Tryb designu</li>
+  <li>Wbudowany Messenger do wzorca publish/subscribe</li>
+  <li>Kontener IoC</li>
+  <li>Nawigacja i dialogi</li>
+</ul>
+
+<h4 id="inicjalizacja">Inicjalizacja</h4>
+
+<p>Paczka Mvvm Light jest dostępna na nugecie. Mamy do wyboru 2 wersje:</p>
+
+<ul>
+  <li><a href="https://www.nuget.org/packages/MvvmLight/">MvvmLight</a> – dodaje do naszego projektu biblioteki oraz przykładowe pliki <code class="language-plaintext highlighter-rouge">MainViewModel.cs</code> i <code class="language-plaintext highlighter-rouge">ViewModelLocator.cs</code>, a do tego modyfikuje <code class="language-plaintext highlighter-rouge">App.xaml.cs</code></li>
+  <li><a href="https://www.nuget.org/packages/MvvmLightLibs/">MvvmLightLibs</a> – dodaje do projektu tylko biblioteki i nic automatycznie nie zmienia (jak paczka powyżej)</li>
+</ul>
+
+<p>Ja zawsze korzystam z drugiej paczki – ustawienie projektu jest proste i do tego w Formsach robię to trochę inaczej niż skrypt z nugeta.</p>
+
+<p>Standardowo, w Mvvm Light używamy klasy nazwanej <code class="language-plaintext highlighter-rouge">ViewModelLocator</code>, w której rejestrujemy wszystkie view modele i usługi.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/c6d4dc0cc20bbfa9a59b16d15cba9409.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/c6d4dc0cc20bbfa9a59b16d15cba9409).</noscript></div>
+<p>Później, żeby mieć dostęp do <code class="language-plaintext highlighter-rouge">ViewModelLocatora</code>, tworzymy jego instancję w klasie <code class="language-plaintext highlighter-rouge">App.xaml.cs</code>:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/498cca52b21a593f0e128c723ac0a567.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/498cca52b21a593f0e128c723ac0a567).</noscript></div>
+<p>Dodajemy ją również do <code class="language-plaintext highlighter-rouge">Resources</code>, żeby mieć wygodny dostęp z xamla. To tyle, jeśli chodzi o wstępną konfigurację.</p>
+
+<h4 id="viewmodele">ViewModele</h4>
+
+<p>W view modelach mamy zaimplementowany <code class="language-plaintext highlighter-rouge">INotifyPropertyChanged</code> i możemy informować widoki o zmianach metodą <code class="language-plaintext highlighter-rouge">RaisePropertyChanged</code>. W zasadzie poza tym jest niewiele więcej. Nie ma tu dostępnych, tak jak w innych frameworkach, metod wywoływanych przy pokazywaniu/ukrywaniu widoku, czy nawigacji między view modelami z przekazywaniem parametrów. Mamy tu tylko niezbędne minimum.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/06366c2a74d316e37659790f329ff29a.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/06366c2a74d316e37659790f329ff29a).</noscript></div>
+<h4 id="relaycommand">RelayCommand</h4>
+
+<p>Do komend mamy wbudowaną implementację interfejsu ICommand – RelayCommand:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/b741d516f07099a87ef203aee8cd4728.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/b741d516f07099a87ef203aee8cd4728).</noscript></div>
+<p>Możemy używać zwykłych komend lub z parametrem. Parametr dostępny jest tylko jeden, jeśli musimy przekazać coś więcej, to trzeba to opakować w jakiś obiekt.</p>
+
+<h4 id="tryb-designu">Tryb designu</h4>
+
+<p><strong>Design Mode</strong> to całkiem ciekawa funkcja, ale nie znajdziemy jej w Xamarin.Forms. Działa tylko dla WPF/WP. W view modelach mamy dostępne właściwości <code class="language-plaintext highlighter-rouge">IsInDesignMode</code> i <code class="language-plaintext highlighter-rouge">IsInDesignModeStatic</code>. Za ich pomocą można sprawdzić, czy jesteśmy w trybie designu (czyli praca w Visual Studio, podgląd xamla w designerze), czy w działającej aplikacji. Jest to pomocne, gdy chcemy wyświetlić testowe dane w designerze xamla.</p>
+
+<h4 id="messenger">Messenger</h4>
+
+<p>Mamy dostęp do wbudowanego messengera. Z poziomu view modelu możemy użyć właściwości <code class="language-plaintext highlighter-rouge">MessengerInstance</code>, a w innych miejscach <code class="language-plaintext highlighter-rouge">GalaSoft.MvvmLight.Messaging.Messenger.Default</code>.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/8a1460c5f5acffb170fc09f25f52f935.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/8a1460c5f5acffb170fc09f25f52f935).</noscript></div>
+<p>Jak widzimy, wysyłamy wiadomość metodą <code class="language-plaintext highlighter-rouge">Send</code>. Możemy wysłać wiadomość do wszystkich subskrybentów, do konkretnej klasy lub do subskrybentów z danym tokenem. Aby się zarejestrować używamy metody <code class="language-plaintext highlighter-rouge">Register</code> z podaniem typu wiadomości jakie chcemy odbierać i opcjonalnie tokenem.</p>
+
+<h4 id="ioc-i-dependency-injection">IoC i Dependency Injection</h4>
+
+<p>Mvvm Light używa prostego kontenera IoC nazywanego <code class="language-plaintext highlighter-rouge">SimpleIoc</code>. W pierwszym fragmencie kodu, przy okazji inicjalizacji, widzieliśmy już jak go używać. Możemy rejestrować klasy za pomocą <code class="language-plaintext highlighter-rouge">SimpleIoc.Default.Register</code> – podając samą klasę lub także odpowiadający jej interfejs. Przy okazji <code class="language-plaintext highlighter-rouge">DbService</code> używam tam <code class="language-plaintext highlighter-rouge">DependencyService</code>, który jest częścią Xamarin.Forms. Jego metoda <code class="language-plaintext highlighter-rouge">Get</code> pozwala nam pobrać implementację interfejsu dla danej platformy. Tutaj potrzebowałem instancji <code class="language-plaintext highlighter-rouge">IFileService</code> jako parametru dla <code class="language-plaintext highlighter-rouge">DbService</code>.</p>
+
+<p>W tym samym fragmencie kodu, w linijkach 13 i 14, widzimy jak odwoływać się do klas zarejestrowanych w kontenerze.</p>
+
+<p>Framework zapewnia nam wstrzykiwanie przez konstruktor do view modeli obiektów, które zarejestrowaliśmy w kontenerze IoC.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/04c1dfe7e1a1760ac8c7ff8e0617ef23.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/04c1dfe7e1a1760ac8c7ff8e0617ef23).</noscript></div>
+<h4 id="bindowanie">Bindowanie</h4>
+
+<p>Bindowanie nie jest tutaj automatyczne. Musimy sami przypisać view model do właściwości BindingContext danej strony. Robimy to w konstruktorze strony:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/14add90069d64100f6ca59d40b2c94d1.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/14add90069d64100f6ca59d40b2c94d1).</noscript></div>
+<p>Właśnie dlatego stworzyliśmy właściwość ViewModelLocatora w klasie App – dzięki temu będzie nam wygodnie się do niej odwoływać.</p>
+
+<h4 id="nawigacja-i-dialogi">Nawigacja i dialogi</h4>
+
+<p>Mvvm Light ma także wbudowaną nawigację, jednak jest to nawigacja przeznaczona dla aplikacji w natywnym Xamarinie, a nie Xamarin.Forms. Tutaj musiałem zbudować swój serwis, który wykorzystywał nawigację z Formsów, tak abym mógł używać jej w view modelach.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/8937736669a2be796afb8b4e2e9bf1f5.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/8937736669a2be796afb8b4e2e9bf1f5).</noscript></div>
+<p>Framework ma wbudowane podstawowe dialogi z metodami <code class="language-plaintext highlighter-rouge">ShowMessage</code> i <code class="language-plaintext highlighter-rouge">ShowError</code>, gdzie możemy ustawić tytuł, wiadomość, tekst przycisku (lub przycisków) i akcję po zamknięciu.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/a260395e99d1ba1e6df341e458e37934.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/a260395e99d1ba1e6df341e458e37934).</noscript></div>
+<p>Implementacja tych dialogów jest zależna od platform, więc musimy zainicjalizować je oddzielnie w każdej platformie. Niestety, wygląda na to, że dialog te nie są w pełni kompatybilne z Xamarin.Forms. Działają one bez problemu na UWP i iOS, ale z Androidem jest już problem. Lepiej pewnie będzie użyć domyślnych dialogów z Formsów lub np. <a href="https://www.nuget.org/packages/Acr.UserDialogs/">ACR User Dialogs</a>, które są bardzo rozbudowane.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Mvvm Light Toolkit to mały i prosty w obsłudze framework do MVVM. Dobrze nadaje się do małych aplikacji lub gdy dopiero zaczynamy przygodę z mvvm. Jako, że jest popularny, znajdziemy w sieci dużo materiałów na jego temat, a także dużo odpowiedzi na <a href="https://stackoverflow.com/questions/tagged/mvvm-light">StackOverflow</a>. Powinien być odpowiedni dla kogoś, kto chce się nauczyć na czym polega mvvm. Posiada niezbędne elementy i niewiele poza tym, a więc nie będzie niepotrzebnie mieszał w głowie i obciążał aplikacji.</p>
+
+<p>Link do przykładowej aplikacji: <a href="https://github.com/tomwis/SimpleBudgetMvvmLight">https://github.com/tomwis/SimpleBudgetMvvmLight</a></p>
+
+<p>Link do oficjalnej strony: <a href="http://www.mvvmlight.net">http://www.mvvmlight.net</a></p>
+
+  </div><a class="u-url" href="/2017/10/29/mvvm-light-toolkit-prosty-framework-mvvm-dla-xamarin-xamarin-forms/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Lazy Loading</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Lazy Loading</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomwis"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomwis</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog o mobilnym programowaniu w C#</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

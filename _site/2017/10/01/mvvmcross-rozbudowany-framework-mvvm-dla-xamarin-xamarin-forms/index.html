@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>MvvmCross - rozbudowany framework MVVM dla Xamarin i Xamarin.Forms | Lazy Loading</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="MvvmCross - rozbudowany framework MVVM dla Xamarin i Xamarin.Forms" />
+<meta name="author" content="Tomasz Wiśniewski" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Niedawno pisałem o FreshMvvm, który był bardzo lekki i prosty w użyciu. Dzisiaj pora na inny framework, z zupełnie odmiennym podejściem. MvvmCross jest bardziej kompleksowym rozwiązaniem, posiadającym większą ilość różnych funkcji. Możemy go stosować zarówno w projektach z natywnym Xamarinem, jak i w Xamarin.Forms." />
+<meta property="og:description" content="Niedawno pisałem o FreshMvvm, który był bardzo lekki i prosty w użyciu. Dzisiaj pora na inny framework, z zupełnie odmiennym podejściem. MvvmCross jest bardziej kompleksowym rozwiązaniem, posiadającym większą ilość różnych funkcji. Możemy go stosować zarówno w projektach z natywnym Xamarinem, jak i w Xamarin.Forms." />
+<link rel="canonical" href="http://localhost:4000/2017/10/01/mvvmcross-rozbudowany-framework-mvvm-dla-xamarin-xamarin-forms/" />
+<meta property="og:url" content="http://localhost:4000/2017/10/01/mvvmcross-rozbudowany-framework-mvvm-dla-xamarin-xamarin-forms/" />
+<meta property="og:site_name" content="Lazy Loading" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-10-01T13:42:48+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="MvvmCross - rozbudowany framework MVVM dla Xamarin i Xamarin.Forms" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tomasz Wiśniewski"},"dateModified":"2017-10-01T13:42:48+02:00","datePublished":"2017-10-01T13:42:48+02:00","description":"Niedawno pisałem o FreshMvvm, który był bardzo lekki i prosty w użyciu. Dzisiaj pora na inny framework, z zupełnie odmiennym podejściem. MvvmCross jest bardziej kompleksowym rozwiązaniem, posiadającym większą ilość różnych funkcji. Możemy go stosować zarówno w projektach z natywnym Xamarinem, jak i w Xamarin.Forms.","headline":"MvvmCross - rozbudowany framework MVVM dla Xamarin i Xamarin.Forms","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/10/01/mvvmcross-rozbudowany-framework-mvvm-dla-xamarin-xamarin-forms/"},"url":"http://localhost:4000/2017/10/01/mvvmcross-rozbudowany-framework-mvvm-dla-xamarin-xamarin-forms/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lazy Loading" /></head>
+<body><header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Lazy Loading</a>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="/external-articles/">Zewnętrzne artykuły</a><a class="page-link" href="/about/">O mnie</a></div>
+    </nav>
+  </div>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">MvvmCross - rozbudowany framework MVVM dla Xamarin i Xamarin.Forms</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-10-01T13:42:48+02:00" itemprop="datePublished">Oct 1, 2017
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Tomasz Wiśniewski</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Niedawno pisałem o <a href="/2017/09/03/freshmvvm-lekki-framework-mvvm-dla-xamarin-forms/">FreshMvvm</a>, który był bardzo lekki i prosty w użyciu. Dzisiaj pora na inny framework, z zupełnie odmiennym podejściem. MvvmCross jest bardziej kompleksowym rozwiązaniem, posiadającym większą ilość różnych funkcji. <strong>Możemy go stosować zarówno w projektach z natywnym Xamarinem, jak i w Xamarin.Forms.</strong></p>
+
+<p>Przy okazji opisywania FreshMvvm stworzyłem prostą aplikację do budżetu. Teraz przepisałem ją na MvvmCross i na jej podstawie przedstawię poniżej ważniejsze funkcje tego frameworka. Jest to aplikacja Xamarin.Forms, a więc będę się skupiać na aspektach MvvmCross dotyczących Formsów. Wspierane przez moją aplikację platformy to Android i iOS. UWP niestety nie dałem rady uruchomić.</p>
+
+<h4 id="starterpack">StarterPack</h4>
+
+<p>MvvmCross posiada pakiet nuget o nazwie <a href="https://www.nuget.org/packages/MvvmCross.StarterPack/">MvvmCross.StarterPack</a>. <strong>Jest to bardzo pomocna paczka, która dodaje nam do projektów wszystkie pliki potrzebne do początkowej konfiguracji</strong> i odpalenia aplikacji przez ten framework. Bez tej paczki byłoby to raczej trudne, ponieważ nigdzie nie widziałem dobrego poradnika jak to zrobić. Ostatnio <a href="https://medium.com/@martijn00/using-mvvmcross-with-xamarin-forms-part-1-eaee5815bb8c">pojawił się post</a> o rozpoczynaniu pracy z Xamarin.Forms przy użyciu MvvmCross, więc jest to pewna pomoc. Ale jeśli chodzi o natywnego Xamarina, to niestety nic podobnego nie znalazłem. Dlatego bez StarterPacka rozpoczęcie pracy z tym frameworkiem byłoby ciężkie.</p>
+
+<p>Jest też dostępnych kilka szablonów do Visual Studio dla MvvmCross – <a href="https://www.mvvmcross.com/documentation/getting-started/getting-started.html#mvvmcross-templates">tutaj</a>. Nie są to jednak szablony oficjalne.</p>
+
+<h4 id="podstawowa-konfiguracja">Podstawowa konfiguracja</h4>
+
+<p>Minimalna konfiguracja frameworka odbywa się w dwóch miejscach. We wspólnym kodzie, w projekcie PCL dodajemy klasę <code class="language-plaintext highlighter-rouge">CoreApp</code> dziedziczącą po <code class="language-plaintext highlighter-rouge">MvxApplication</code>. Tam możemy np. załadować serwisy, czy zadeklarować początkowy ViewModel:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/62cbfce127794ea680235faa86916294.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/62cbfce127794ea680235faa86916294).</noscript></div>
+<p>Druga część konfiguracji odbywa się w projekcie danej platformy. Tam tworzymy klasę <code class="language-plaintext highlighter-rouge">Setup</code>, która np. na androidzie dziedziczy po <code class="language-plaintext highlighter-rouge">MvxFormsAndroidSetup</code> (a na innych platformach po podobnych klasach). Tam odbywa się np. rejestracja implementacji interfejsów, których zachowanie jest zależne od platformy, tworzenie wyżej wspomnianej klasy <code class="language-plaintext highlighter-rouge">CoreApp</code>, ustalanie zachowania IoC (więcej o tym niżej), rejestracja konwerterów i parę innych rzeczy. Mamy tu prawie całą konfigurację dla danej platformy (oprócz pluginów) – <a href="https://www.mvvmcross.com/documentation/fundamentals/Customizing-using-App-and-Setup">więcej w dokumentacji</a>.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/09a8c0c20f4fc763c3af5e1463cc6629.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/09a8c0c20f4fc763c3af5e1463cc6629).</noscript></div>
+<h4 id="bindings">Bindings</h4>
+
+<p>Wiązanie widoku i ViewModelu jest w zasadzie automatycznie, trzeba jednak spełnić 1 warunek – nazewnictwo. <strong>Widok musi kończyć się na View, a view model na ViewModel.</strong> Tak więc, np. <code class="language-plaintext highlighter-rouge">DashboardView</code> i <code class="language-plaintext highlighter-rouge">DashboardViewModel</code> zostaną ze sobą powiązane. Nazewnictwo wiązań może zostać przez nas nadpisane w klasie <code class="language-plaintext highlighter-rouge">Setup</code>. Dodatkowo do widoku możemy dodać typ view modeli, np. <code class="language-plaintext highlighter-rouge">MvxContentPage&lt;DashboardViewModel&gt;</code>. Wtedy z poziomu widoku będziemy mieli dostępną właściwość <code class="language-plaintext highlighter-rouge">ViewModel</code> o podanym typie.</p>
+
+<p>Możemy używać wbudowanych w Xamarin.Forms wiązań, czyli np. <code class="language-plaintext highlighter-rouge">Text="{Binding MyProperty}"</code>. <strong>Są jednak również dostępne specjalne wiązania z MvvmCross.</strong></p>
+
+<ol>
+  <li>Pierwszy typ wiązania to <code class="language-plaintext highlighter-rouge">mvx:Bi.nd="Text MyProperty; TextColor MyColorProperty"</code>. Zalety:
+    <ol>
+      <li>Mamy wiele wiązań w jednym miejscu. Składnia jest tu trochę krótsza.</li>
+      <li>MvvmCross ma kilka wbudowanych konwerterów, np. dla Visibility, czy koloru (sam ich nie używałem – niby wierzę na słowo, ale jak zaraz się okaże, różnie to bywa).</li>
+      <li>Mamy tu łączenie warunków za pomocą <code class="language-plaintext highlighter-rouge">And</code>, <code class="language-plaintext highlighter-rouge">Or</code>. Czasami może to zaoszczędzić trochę kodu.</li>
+    </ol>
+  </li>
+  <li>Drugi typ wiązania to <code class="language-plaintext highlighter-rouge">mvx:La.ng="Text TranslatedStringId"</code>. Powinno to umożliwiać łatwe tłumaczenie tekstów z plików resx lub json. Powinno, ale niestety tego nie robi, ponieważ nie działa. Zmarnowałem na to sporo więcej czasu niż powinienem. Zadałem nawet na ten temat pytania na Stackoverflow i repozytorium MvvmCross – niestety odpowiedziała mi cisza. W przykładzie z oficjalnego repozytorium ta funkcja także nie działa, a więc nie jest to mój błąd w używaniu. Trzeba po prostu poczekać aż to naprawią. Byłoby miło, bo jest to całkiem przydatna rzecz.</li>
+</ol>
+
+<p>Wiązania te wyglądają tak samo jak przy natywnym Xamarinie. Jest to więc plus jeśli kiedyś planowalibyśmy przepisanie aplikacji lub rozpoczęcie nowej już w natywnym Xamarinie. Sam tych wiązań nie używałem. Jeden powód to taki, że <code class="language-plaintext highlighter-rouge">mvx:La.ng</code> nie działało, a drugi taki, że niektóre wiązania z <code class="language-plaintext highlighter-rouge">mvx:Bi.nd</code> również miały pewne problemy – być może rozwiązywalne, ale po przygodach z <code class="language-plaintext highlighter-rouge">mvx:La.ng</code> już nie miałem za bardzo czasu i ochoty tego sprawdzać.</p>
+
+<h4 id="inversion-of-control-i-dependency-injection">Inversion of Control i Dependency Injection</h4>
+
+<p>Jak można zobaczyć we fragmencie kodu powyżej, w linijce 10, dostępny jest kontener IoC. Rejestracja do niego może również odbywać się tak jak w pierwszym fragmencie w linijkach 5-8 (dla klas zaimplementowanych w bibliotece, z której to wywołujemy).</p>
+
+<p>Zależności możemy wstrzykiwać do ViewModeli poprzez konstruktor lub poprzez właściwość. Aby użyć drugiego sposobu, należy dodać do właściwość atrybut <code class="language-plaintext highlighter-rouge">[MvxInject]</code> lub w klasie <code class="language-plaintext highlighter-rouge">Setup</code> nadpisać metodę <code class="language-plaintext highlighter-rouge">CreateIocOptions</code> i ustawić <code class="language-plaintext highlighter-rouge">PropertyInjectorOptions</code> na <code class="language-plaintext highlighter-rouge">MvxPropertyInjectorOptions.All</code> (jak w przykładzie wyżej – linijka 28).</p>
+
+<h4 id="nawigacja-i-komunikacja-między-viewmodelami">Nawigacja i komunikacja między ViewModelami</h4>
+
+<p>Nawigacja odbywa się tutaj pomiędzy ViewModelami, a nie widokami. Mamy dostępną metodę <code class="language-plaintext highlighter-rouge">Navigate</code> w <code class="language-plaintext highlighter-rouge">IMvxNavigationService</code>, która nam w tym pomaga. Jako że widoki są powiązane z ViewModelami, to nawigując do nowego view modelu, framework wyszukuje powiązaną z nim stronę i ją wczytuje. Możliwe jest napisanie własnych prezenterów, czyli sekcji odpowiedzialnych za wczytywanie widoku, jeśli chcemy obsłużyć jakieś niestandardowe sytuacje.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/b5c7eff29773a9ab38d77de47b0b4661.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/b5c7eff29773a9ab38d77de47b0b4661).</noscript></div>
+<p>Jak widzimy wyżej, mamy kilka wariantów nawigacji. Możemy po prostu przejść do nowej strony, ale <strong>możemy też przekazać jakiś parametr</strong>. Będzie on dostępny w nowym view modelu w metodzie Initialize:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/b3aee83798f80a0eb08de83be3337d7c.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/b3aee83798f80a0eb08de83be3337d7c).</noscript></div>
+<p><strong>Trzeci wariant metody pozwala nam natomiast na poczekanie aż nowy view model zwróci wartość.</strong> Aby to zrobić, w nowym view modelu (u nas <code class="language-plaintext highlighter-rouge">MonthEditViewModel</code>) należy wywołać <code class="language-plaintext highlighter-rouge">await Close(MonthItem);</code>. Metoda ta zamyka obecny view model (a więc także i połączony z nim widok) i zwraca <code class="language-plaintext highlighter-rouge">MonthItem</code> do poprzedniego view modelu. Jest to bardzo wygodne rozwiązanie.</p>
+
+<h4 id="zdarzenia-w-viewmodelach">Zdarzenia w ViewModelach</h4>
+
+<p>W view modelach mamy dostępne metody powiązane ze zdarzeniami widoków – <code class="language-plaintext highlighter-rouge">ViewAppearing</code> oraz <code class="language-plaintext highlighter-rouge">ViewDisappearing</code>. Również bardzo przydatna rzecz.</p>
+
+<h4 id="pluginy">Pluginy</h4>
+
+<p>MvvmCross posiada wiele różnych pluginów. Przykładowo – messenger do wzorca publish/subscribe, Accelerometer, DownloadCache, PhoneCall, Share i wiele innych. <a href="https://www.mvvmcross.com/documentation/plugins/3rd-party-plugins?scroll=898">Tutaj</a> link do pluginów 3rd party z dokumentacji. W menu po lewej znajduje się też lista oficjalnych pluginów (niestety każdy na oddzielnej stronie, więc nie mogę zalinkować).</p>
+
+<p>W Xamarin.Forms nie wszystkie pluginy się przydadzą. Mamy tu już wbudowanego messengera, czy <code class="language-plaintext highlighter-rouge">Device.OpenUri</code>, które poradzi sobie z przekierowaniem do telefonu.</p>
+
+<p><strong>Każdy plugin trzeba załadować poprzez stworzenie odpowiedniej klasy</strong> (nigdzie jej nie wywołujemy – framework ją sobie znajdzie i załaduje plugin).</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/2970594247dad358c1e836bcef409e1c.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/2970594247dad358c1e836bcef409e1c).</noscript></div>
+<p>Na szczęście dzieje się to automatycznie podczas instalowania pakietu danego pluginu z nugeta.</p>
+
+<h4 id="społeczność-i-dokumentacja">Społeczność i dokumentacja</h4>
+
+<p>Społeczność na pewno jest czymś co trzeba wspomnieć przy MvvmCross. Jest to duży framework, rozwijany przez grupę osób. Można więc zakładać, że jego wsparcie szybko się nie zakończy. <strong>Jak na razie ciągle jest aktywnie rozwijany.</strong></p>
+
+<p>Dokumentacja jest obszerna. Co więcej, twórca MvvmCross tworzył kilka lat temu wiele postów na temat tego frameworka, nagrywał również sporo pomocnych filmików tłumaczących jak zaimplementować wiele rzeczy. Wszystkie te filmiki dostępne są <a href="http://mvvmcross.blogspot.com">tutaj</a>.</p>
+
+<p>Społeczność również jest rozbudowana, na <a href="https://stackoverflow.com/questions/tagged/mvvmcross">StackOverflow</a> znajdziemy masę pytań związanych z MvvmCross – na które w dużej mierze odpowiadali twórcy.</p>
+
+<p>Jest tu jednak pewien problem. Wcześniej wspominałem o trudnych początkach, jeśli nie mielibyśmy StarterPacka, czy o nie działającym mvx:La.ng i braku pomocy. Jak widać – nie zawsze jest różowo i nie zawsze będziemy w stanie dostać pomoc, mimo rozbudowanej społeczności. Ale ten problem dotyczy raczej każdej technologii 🙂 Drugim zgrzytem jest dokumentacja – jest niepełna i nieaktualna. Framework jest ciągle rozwijany, a dokumentacja nie do końca. Na wiele pytań znajdziemy jednak odpowiedzi, jeśli nie na oficjalnej stronie, to na StackOverflow.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>MvvmCross to rozbudowany framework i opisałem tu jedynie część jego możliwości. To dobre narzędzie do natywnego Xamarina, gdzie dodaje sporo wartości i ciężko byłoby się bez niego obejść. <strong>A czy użyłbym go w Xamarin.Forms? Raczej nie.</strong> Tutaj według mnie lepiej sprawdzi się coś mniejszego jak <a href="/2017/09/03/freshmvvm-lekki-framework-mvvm-dla-xamarin-forms/">FreshMvvm</a>, czy MvvmLight Toolkit. Będę one wystarczające. Są prostsze, a więc także próg wejścia będzie niższy – co może być ważne dla programistów dopiero zaczynających pracę z Xamarin.Forms. Framework ten stawia na prostotę tworzenia aplikacji, a więc łatwiejsze w użyciu biblioteki świetnie się tu nadadzą.</p>
+
+<p>Link do przykładowej aplikacji na githubie: <a href="https://github.com/tomwis/SimpleBudgetMvvmCross">https://github.com/tomwis/SimpleBudgetMvvmCross</a></p>
+
+<p>Oraz do oficjalnej strony MvvmCross: <a href="https://www.mvvmcross.com">https://www.mvvmcross.com</a></p>
+
+  </div><a class="u-url" href="/2017/10/01/mvvmcross-rozbudowany-framework-mvvm-dla-xamarin-xamarin-forms/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Lazy Loading</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Lazy Loading</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomwis"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomwis</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog o mobilnym programowaniu w C#</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

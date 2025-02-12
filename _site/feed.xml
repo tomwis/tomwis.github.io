@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-02-12T20:06:51+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Lazy Loading</title><subtitle>Blog o mobilnym programowaniu w C#</subtitle><entry><title type="html">Xamarin.Forms Performance - nowe testy</title><link href="http://localhost:4000/2018/03/07/xamarin-forms-performance-nowe-testy/" rel="alternate" type="text/html" title="Xamarin.Forms Performance - nowe testy" /><published>2018-03-07T19:46:20+01:00</published><updated>2018-03-07T19:46:20+01:00</updated><id>http://localhost:4000/2018/03/07/xamarin-forms-performance-nowe-testy</id><content type="html" xml:base="http://localhost:4000/2018/03/07/xamarin-forms-performance-nowe-testy/"><![CDATA[<p>Trochę czasu minęło od poprzedniego wpisu, a jeszcze więcej od ostatniej aktualizacji mojego projektu dotyczącego mierzenia wydajności Xamarin.Forms. Jednak mimo ciszy, trochę się w nim działo.</p>
+
+<h4 id="co-nowego-doszło">Co nowego doszło?</h4>
+
+<p>Dodałem do aplikacji nowe testy:</p>
+
+<ul>
+  <li><strong>6 testów dla ListView</strong>. Sprawdzam tutaj wydajność podstawowych komórek – TextCell, ImageCell, SwitchCell i EntryCell, a także wydajność ViewCell – w tym przypadku zbudował 2 layouty, podstawowy i bardziej rozbudowany. Test polega na wczytaniu listy z 200 elementami i przejechaniu do końca listy. Starałem się, żeby automatyzacja scrollowania w miarę dobrze oddawała wydajność i wydaje mi się, że w miarę dobrze to wyszło.</li>
+  <li><strong>5 testów dla layoutów</strong>. W tym:
+    <ul>
+      <li>2 dla StackLayout:
+        <ul>
+          <li>Jeden to ładowanie widoku z zagnieżdżonymi StackLayoutami jeden pod drugim. Jest to struktura, która dobrze nadaje się dla StackLayouta.</li>
+          <li>Drugi to również zagnieżdżone StackLayouty, z tym że ich struktura przypomina bardziej coś, co zbudowalibyśmy z Gridów. Dlaczego to zrobiłem? Żeby porównać sobie wydajność właśnie z Gridami, których testy również stworzyłem.</li>
+        </ul>
+      </li>
+      <li>3 dla Gridów. Tutaj ładuję widok, gdzie mamy zagnieżdżone Gridy. Różnica między tymi trzema testami jest tylko jedna – typy rozmiarów w kolumnach i wierszach. W jednym teście wszystkie są jako „Star” (*), w drugi wszystkie są jako „Auto”, a w trzecim wszystkie mają stałe wartości. Byłem ciekawy jaki rzeczywisty wpływ na wydajność mają typy rozmiarów. Jeśli też jesteście ciekawi, to możecie to sprawdzić sami w wynikach na stronie 😉</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Przypominam adres strony, pod którym znajdują się aktualne wyniki: <a href="http://xamformsperf.azurewebsites.net">http://xamformsperf.azurewebsites.net</a></p>
+
+<p>Powtórzyłem wszystkie testy, tak żeby były wykonane w jednym czasie, na tym samym urządzeniu i wersji systemu. Całość trwała jakieś 4 godziny. <strong>Co ciekawe, jeden przebieg testów dla Androida trwa jakieś 3 razy dłużej niż dla iOS.</strong> Może to mieć związek z szybkością samego telefonu, ale to chyba nie tylko to.</p>
+
+<p>Oprócz zaktualizowania wyników na stronie, <strong>zmieniłem również tytuły testów oraz dodałem opisy</strong>, tak żeby było jasne, co było wykonywane w ramach danego testu.</p>
+
+<h4 id="wnioski">Wnioski</h4>
+
+<p><strong>Obecnie mamy 18 testów. Wykonałem je na 11 najnowszych wersjach Xamarin.Forms.</strong> Każdy test był powtarzany 10 razy i wynik był uśredniany.</p>
+
+<p>Na stronie z wynikami na wykresach wyraźnie widać, że <strong>wydajność Xamarin.Forms dla iOS w ostatnich czasach była stabilna</strong>. Android też nie ma jakichś wielkich wahań, ale zdarzają się zmiany o kilka, czy czasami nawet kilkanaście procent. Wszystko jednak wydaje się pozostawać w normie.</p>
+
+<p>Bardzo chciałem porównać starsze wersje Xamarin.Forms z nowszymi, jednak instalacja starszych wersji sprawiała dużo problemów i dlatego na razie dałem sobie z tym spokój. Jednak <strong>fajnie byłoby zobaczyć, czy i ile Xamarin.Forms poprawił się przez ostatnie lata</strong>. Wiemy, że brakuje mu wydajności, a z obecnych testów widać, że jakichś większych zmian nie ma.</p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="Xamarin" /><summary type="html"><![CDATA[Trochę czasu minęło od poprzedniego wpisu, a jeszcze więcej od ostatniej aktualizacji mojego projektu dotyczącego mierzenia wydajności Xamarin.Forms. Jednak mimo ciszy, trochę się w nim działo.]]></summary></entry><entry><title type="html">Szybkie wykresy z Chart.js</title><link href="http://localhost:4000/2018/02/11/szybkie-wykresy-chart-js/" rel="alternate" type="text/html" title="Szybkie wykresy z Chart.js" /><published>2018-02-11T16:44:38+01:00</published><updated>2018-02-11T16:44:38+01:00</updated><id>http://localhost:4000/2018/02/11/szybkie-wykresy-chart-js</id><content type="html" xml:base="http://localhost:4000/2018/02/11/szybkie-wykresy-chart-js/"><![CDATA[<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+<p>Gdy pracowałem nad projektem testowania wydajności Xamarin.Forms chciałem stworzyć prosty sposób dla ludzi do obejrzenia wyników. Mało kto będzie na tyle zdeterminowany, żeby ściągać projekt z GitHuba i go odpalać. Dlatego stworzyłem stronę, na której można przejrzeć wszystkie wyniki (<a href="http://xamformsperf.azurewebsites.net">tutaj</a>). Na początku były to zwykłe tabelki, jednak tabelki, nawet z kolorami, nie są aż tak zachęcające. Dlatego postanowiłem zastąpić je wykresami. Zastanawiałem się, czego mogę używać. Myślałem o gotowych komponentach, np. od Syncfusion (strona jest napisana w ASP.NET MVC). Jednak wydawało mi się, że dla jednego wykresu będzie to za dużo zabawy. Dlatego poszukałem czegoś innego i znalazłem <a href="http://www.chartjs.org">chart.js</a>.</p>
+
+<h4 id="wprowadzenie">Wprowadzenie</h4>
+
+<p>Chart.js to biblioteka, jak nie trudno się domyślić, napisana w JavaScript 😉 Jest bardzo prosta w użyciu. Żeby zobaczyć pierwszy wykres na swojej stronie, wystarczy poświęcić jej kilka minut. Jednak mimo tego, że jest prosta, nadal posiada wiele opcji i wystarczy nam do różnych scenariuszy.</p>
+
+<h4 id="jak-zacząć">Jak zacząć?</h4>
+
+<p>Musimy dodać skrypt js do naszej strony. Możemy dodać go do projektu lub użyć CDN. Druga opcja jest chyba wygodniejsza. W moim projekcie wyglądało to po prostu tak:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/fb166fe88b470ec09b794a0c28a6c729.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/fb166fe88b470ec09b794a0c28a6c729).</noscript></div>
+<p>Gdy skrypt jest dodany, wtedy możemy wyświetlić pierwszy wykres. W miejscu, w którym chcemy go zobaczyć, dodajemy tag <code class="language-plaintext highlighter-rouge">canvas</code> z id oraz wysokością i szerokością.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/7142e4c97a46cf8b5eee485d29a63319.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/7142e4c97a46cf8b5eee485d29a63319).</noscript></div>
+<p>Następnie umieszczamy gdzieś skrypt, który wczyta do tego canvasa wykres. Powyżej widzimy najprostszy możliwy kod – wykres kolumnowy, z dwoma wartościami. Ważne jest to aby w obiekcie <code class="language-plaintext highlighter-rouge">data</code> dodać labele (oś x), i dataset z danymi w polu <code class="language-plaintext highlighter-rouge">data</code> – ilość danych powinna się zgadzać z ilością labeli. Tyle wystarczy, <code class="language-plaintext highlighter-rouge">backgroundColor</code> można pominąć, jednak zazwyczaj jest to przydatne. Efekt będzie taki:</p>
+
+<canvas height="300" id="myChart" width="800"></canvas>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue"],
+        datasets: [{
+            label: 'Which color do you like?',
+            data: [12, 19],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ]
+        }]
+    }
+});
+</script>
+
+<p>Jak widzimy brakuje nam pierwszej kolumny. Domyślnie oś y wyświetla się od najmniejszej wartości. Jeśli dodamy jednak do wykresu opcję <code class="language-plaintext highlighter-rouge">beginAtZero</code>, to otrzymamy oczekiwany efekt:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/a878cf2003aed7e4cbf6230a620f8982.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/a878cf2003aed7e4cbf6230a620f8982).</noscript></div>
+<canvas height="300" id="myChart2" width="800"></canvas>
+<script>
+var ctx = document.getElementById("myChart2").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue"],
+        datasets: [{
+            label: 'Which color do you like?',
+            data: [12, 19],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+<p>Dodałem także obramowanie dla kolumn. Jak widzisz, jest to bardzo proste.</p>
+
+<p>Teraz zauważyłem, że w poście wykresy te wyglądają na nie do końca wyraźne (nawet jak dopasowałem rozmiar pixel do pixela). Na stronie, którą robiłem nie ma tego problemu – możecie to zobaczyć <a href="http://xamformsperf.azurewebsites.net">tutaj</a>. Ciekawe. Szybkie googlowanie pokazuje, że jest to znany problem 🙂 Niestety nie udało mi się na szybko znaleźć rozwiązania.</p>
+
+<h4 id="opcje-i-pluginy">Opcje i pluginy</h4>
+
+<p>Właściwie tylko tyle potrzebujemy, żeby wyświetlać wykresy na naszej stronie. Jednak tak jak mówiłem, chart.js posiada wiele opcji, których najlepiej szukać w <a href="http://www.chartjs.org/docs/latest/">dokumentacji</a>. Warto też spojrzeć na <a href="http://www.chartjs.org/samples/latest/">przykłady</a> – tutaj pewnie będzie nawet łatwiej znaleźć to, czego potrzebujemy. Jako że jest to js, możemy go bez problemu podejrzeć w kodzie strony.</p>
+
+<p>Jeśli czegoś nie znajdziemy, to do chart.js dostępne są także pluginy. Mi osobiści przydał się plugin do wyświetlania tooltipów po najechaniu na kolumny – <a href="https://github.com/chartjs/chartjs-plugin-datalabels">tutaj link</a>. Jest on również dostępny przez cdn i wystarczy go wczytać tak jak chart.js. <a href="http://www.chartjs.org/docs/latest/notes/extensions.html">Tutaj</a> znajdziemy listę popularnych rozszerzeń.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Post jest krótki, ale więcej chyba nie potrzeba. Chart.js to prosta w użyciu biblioteka do wykresów, która daje nam duże możliwości. Nie spotkałem się z większymi problemami podczas jej używania. Dopiero podczas pisania tego posta, natknąłem się na problem z lekko rozmazanymi wykresami. Jednak gdyby spędzić nad tym wystarczająco dużo czasu, pewnie da się to poprawić. Chart.js to na pewno świetna alternatywa dla innych, bardziej rozbudowanych bibliotek i warto jej użyć, gdy chcemy szybko zobaczyć efekty.</p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="JavaScript" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Automatyzacja procesu budowania z Cake Build w C#</title><link href="http://localhost:4000/2018/02/04/automatyzacja-procesu-budowania-cake-build-c/" rel="alternate" type="text/html" title="Automatyzacja procesu budowania z Cake Build w C#" /><published>2018-02-04T17:40:08+01:00</published><updated>2018-02-04T17:40:08+01:00</updated><id>http://localhost:4000/2018/02/04/automatyzacja-procesu-budowania-cake-build-c</id><content type="html" xml:base="http://localhost:4000/2018/02/04/automatyzacja-procesu-budowania-cake-build-c/"><![CDATA[<p>Ostatnio, w ramach [aktualizacji w postępach prac]/2018/02/01/xamarin-forms-performance-dalsza-automatyzacja/) nad projektem XFP, pisałem, że użyłem tam Cake’a. Niektórym być może skojarzy się to z CakePHP, ale to nie o niego chodzi 🙂 Dzisiejszy wpis będzie dotyczył <a href="https://cakebuild.net">Cake Build</a>.</p>
+
+<h4 id="co-to-jest">Co to jest?</h4>
+
+<p><strong>Cake Build to narzędzie do automatyzacji procesu budowy aplikacji i rzeczy z tym związanych.</strong> Możemy tutaj kopiować, czy usuwać pliki, budować projekty, przywracać pakiety z NuGeta, uruchamiać testy i wiele więcej.</p>
+
+<p><strong>Do pisania w Cake’u używamy C#</strong>, a więc polecam go przede wszystkim deweloperom, którzy już znają ten język i pracują z platformą .Net na co dzień. Jeśli tak nie jest, to być może znajdziesz dla siebie lepsze narzędzie, bo wybór jest spory.</p>
+
+<p>Cake dodaje nam cały zestaw metod, które ułatwiają pisanie rzeczy, do których Cake został stworzony. Tak więc możemy np. uruchomić budowanie z msbuild jedną funkcją.</p>
+
+<h4 id="zadania-taski">Zadania (Taski)</h4>
+
+<p>Cake opiera się na zadaniach. Skrypt musi posiadać co najmniej jedno takie zadanie. Posiada ono nazwę, po której później je uruchamiamy za pomocą funkcji <code class="language-plaintext highlighter-rouge">RunTarget</code>.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/86c84e25b9f3ed5d69a6d1e9e08861d5.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/86c84e25b9f3ed5d69a6d1e9e08861d5).</noscript></div>
+<p>Dodatkowo możecie zobaczyć tu obiekt <code class="language-plaintext highlighter-rouge">Argument</code>, gdzie pierwszy parametr to nazwa argumentu, a drugi to jego domyślna wartość. Są to argumenty, których możemy później używać wywołując skrypt z linii komend.</p>
+
+<h4 id="przykładowe-zadanie">Przykładowe zadanie</h4>
+
+<p>Najprostsze zadanie mogłoby wyglądać np. tak:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/a5eb28ac01f73512b7dfcf7a03badea7.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/a5eb28ac01f73512b7dfcf7a03badea7).</noscript></div>
+<p>Używamy tu funkcji <code class="language-plaintext highlighter-rouge">CleanDirectories</code>, żeby wyczyścić wszystkie foldery <code class="language-plaintext highlighter-rouge">bin</code> oraz <code class="language-plaintext highlighter-rouge">obj</code> w folderze solucji. <strong>Do ścieżek używamy wygodnych wzorców. Kropka standardowo oznacza obecny katalog, podwójna gwiazdka to dowolne znaki z więcej niż jednego folderu (w głąb).</strong> Gdybyśmy użyli jednej gwiazdki, oznaczałoby to nazwę pliku lub folderu – ale nie więcej niż jednego. W takim wypadku wyczyścilibyśmy foldery <code class="language-plaintext highlighter-rouge">bin</code> i <code class="language-plaintext highlighter-rouge">obj</code> tylko z najbliższych podfolderów. Z dwiema gwiazdkami wyczyścimy te foldery także z dalszych (głębszych) podfolderów. Skrypt cake zazwyczaj jest uruchamiany z głównego folderu solucji, więc jest to jego początkowy folder i to od niego podajemy ścieżkę.</p>
+
+<p>Podczas prac z Xamarinem czyszczenie tych folderów odbywa się bardzo często. Polecenie <code class="language-plaintext highlighter-rouge">Clean</code> w Visual Studio nie usuwa stamtąd wszystkich plików, a Xamarin czasami zaszaleje i mimo zbudowania projektu deploy’uje na urządzenie starą wersję aplikacji. Dopiero usunięcie tych folderów pomaga.</p>
+
+<h4 id="zadania-zależne">Zadania zależne</h4>
+
+<p>Możliwe, że chcielibyśmy zbudować aplikację, ale przed tym przywrócić pakiety NuGet. Możemy to zrobić z funkcją <code class="language-plaintext highlighter-rouge">NuGetRestore</code> dla całej solucji:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/6bb5639a32ad59cc72117d2f34baba68.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/6bb5639a32ad59cc72117d2f34baba68).</noscript></div>
+<p>Lub też dla pojedynczego projektu. Wtedy jednak musimy podać ścieżkę do folderu <code class="language-plaintext highlighter-rouge">packages</code>:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/6886e5547f1784369239ce3b2b50d916.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/6886e5547f1784369239ce3b2b50d916).</noscript></div>
+<p>Następnie tworzymy zadanie z budowaniem. Tu jako przykład jest projekt z aplikacją na Androida w Xamarinie.</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/6d75f68ef5998e389b10dff28cf108b2.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/6d75f68ef5998e389b10dff28cf108b2).</noscript></div>
+<p>Używamy funkcji <code class="language-plaintext highlighter-rouge">MSBuild</code>, ustawiamy konfigurację na <code class="language-plaintext highlighter-rouge">Release</code> i dodajemy parametr <code class="language-plaintext highlighter-rouge">SignAndroidPackage</code>, dzięki któremu zostanie stworzony także plik apk.</p>
+
+<p>To na co jednak chciałem zwrócić szczególną uwagę, to druga linijka z <code class="language-plaintext highlighter-rouge">IsDependentOn</code>. <strong>Jest to zadanie zależne. Jeśli będziemy chcieli wykonać zadanie „build-android”, to najpierw, automatycznie, wykona się zadanie „restore”.</strong> Jest to bardzo wygodne, bo możemy dzielić zadania na mniejsze fragmenty i w razie potrzeby wywoływać je razem lub pojedynczo nie zmieniając kodu.</p>
+
+<h4 id="paczki-z-nugeta">Paczki z Nugeta</h4>
+
+<p>Do Cake’a można również dodawać rozszerzenia (które nazywają addin i tool). Najprościej zrobić to z nowymi dyrektywami preprocesora <code class="language-plaintext highlighter-rouge">#addin</code> i <code class="language-plaintext highlighter-rouge">#tool</code>. Jeśli np. chcemy uruchomić testy z pomocą NUnita:</p>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/3a054e26d96127abe934c70f8f476763.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/3a054e26d96127abe934c70f8f476763).</noscript></div>
+<p>Dyrektywa w pierwszej linii zainstaluje nam NUnit Runnera we wskazanej wersji, a funkcja <code class="language-plaintext highlighter-rouge">NUnit</code> uruchomi wszystkie testy. Możemy też dodać obiekt <code class="language-plaintext highlighter-rouge">NUnitSettings</code> jako drugi argument i pozmieniać różne opcje.</p>
+
+<h4 id="integracja-z-visual-studio-code">Integracja z Visual Studio Code</h4>
+
+<p>Z Cake’a korzystałem w Visual Studio Code. Jest to bardzo wygodne, ponieważ <a href="https://marketplace.visualstudio.com/items?itemName=cake-build.cake-vscode">mamy dostępny dodatek</a>, który może uruchamiać Cake’owe skrypty oraz zainstalować potrzebne rzeczy w nowym projekcie. Są to skrypty sh oraz ps1 (PowerShell), które zajmują się inicjalizacją i uruchamianiem skryptów cake’owych na Windowsie/Linuxie/OSX. Dostępny jest też intellisense, ale z tego co widziałem działa raczej słabo. Pisałem akurat na Macu i natrafiłem też na jeszcze jeden, drobny problem. W skrypcie sh jest błąd. Przy uruchamianiu cake’a wskazywane jest zadanie, które ma być wykonane. Odbywa się to za pomocą argumentu target. Po argumencie powinniśmy umieścić znak równości i następnie wartość argumentu. Mamy niestety zamiast tego spację. Widziałem jednak na githubie, że błąd ten jest już poprawiony, a więc niedługo możemy się spodziewać działającej wersji. A do tej pory możemy uruchamiać skrypt ręcznie z terminala w Visual Studio Code z podaniem prawidłowego argumentu.</p>
+
+<h4 id="integracja-z-visual-studio">Integracja z Visual Studio</h4>
+
+<p>Do pełnego Visual Studio także powstał <a href="https://marketplace.visualstudio.com/items?itemName=vs-publisher-1392591.CakeforVisualStudio">dodatek</a>. Niestety jeszcze go nie używałem, ale z opisu wygląda na to, że ma podobne możliwości jak dodatek z Visual Studio Code (a może nawet większe). I o to właśnie chodzi. Mamy narzędzie do automatyzacji, zintegrowane ze środowiskiem i możemy wszystkiego szybko używać.</p>
+
+<h4 id="dodatek-do-hockeyapp">Dodatek do HockeyApp</h4>
+
+<p>Do Cake’a istnieje wiele dodatkowych paczek – możecie je przejrzeć na <a href="https://cakebuild.net/addins/">tej stronie</a>. Jedną z ciekawych opcji, przynajmniej dla mnie, jako że zajmuję się Xamarinem, jest integracja z HockeyApp. HockeyApp to narzędzie do raportowania błędów z aplikacji, zbierana statystyk, ale także do dystrybucji aplikacji dla testerów. Dostępny <a href="https://cakebuild.net/dsl/hockeyapp/">tutaj</a> dodatek pozwala nam wgrać aplikację iOS czy Androida do HockeyApp. Jeśli mamy więc w zespole testerów, możemy w ten sposób zautomatyzować dostarczanie im nowych wersji aplikacji do testowania. Ciekawa opcja.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Cake Build to jedno z wielu narzędzi tego typu, ale prawdopodobnie jest to najlepsza opcja dla deweloperów używających głównie .Neta. Pozwala nam w prost sposób zautomatyzować wiele zadań, których nikt nie chce wykonywać, jest zintegrowane ze środowiskiem, może być używane zarówno z Windowsa, jak i Linuxa, czy OSX. Jeśli dążycie w swojej pracy do automatyzacji zadań i nie słyszeliście dotąd o Cake’u, to zainteresowanie się nim może być dobrym następnym krokiem.</p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="C#" /><category term="Visual Studio" /><category term="Xamarin" /><summary type="html"><![CDATA[Ostatnio, w ramach [aktualizacji w postępach prac]/2018/02/01/xamarin-forms-performance-dalsza-automatyzacja/) nad projektem XFP, pisałem, że użyłem tam Cake’a. Niektórym być może skojarzy się to z CakePHP, ale to nie o niego chodzi 🙂 Dzisiejszy wpis będzie dotyczył Cake Build.]]></summary></entry><entry><title type="html">Xamarin.Forms Performance - dalsza automatyzacja</title><link href="http://localhost:4000/2018/02/01/xamarin-forms-performance-dalsza-automatyzacja/" rel="alternate" type="text/html" title="Xamarin.Forms Performance - dalsza automatyzacja" /><published>2018-02-01T18:51:24+01:00</published><updated>2018-02-01T18:51:24+01:00</updated><id>http://localhost:4000/2018/02/01/xamarin-forms-performance-dalsza-automatyzacja</id><content type="html" xml:base="http://localhost:4000/2018/02/01/xamarin-forms-performance-dalsza-automatyzacja/"><![CDATA[<p>Od poprzedniego wpisu minęło więcej czasu niż planowałem. Zeszło mi jednak trochę z tym co robiłem, a i ten wpis nie będzie zbyt długi, bo przedstawię tylko postęp prac w moim projekcie odnośnie badania wydajności Xamarin.Forms między kolejnymi wersjami. W oddzielnych wpisach chciałbym dokładniej przestawiać narzędzia, z których miałem okazję korzystać (a przy okazji nauczyć się) podczas prac.</p>
+
+<h4 id="automatyzacja-wykonywania-testów-ui-z-cake">Automatyzacja wykonywania testów UI z Cake</h4>
+
+<p>To czemu się teraz poświęciłem, to drugi punkt z [ostatniego posta]/2018/01/10/xamarin-forms-performance-aktualizacja-warstwy-prezentacji/) na ten temat. <strong>Do tej pory musiałem ręcznie ustawić wersję Xamarin.Forms z managera pakietów nuget, następnie dla pewności wyczyścić katalogi bin i obj, zbudować aplikację (i apk dla androida), zdeployować na urządzenie, uruchomić testy ui i przenieść wyniki do aplikacji webowej. Obecnie wszystkie te rzeczy wykonują się automatycznie!</strong> To naprawdę niesamowite jak sobie o tym pomyślę, bo nie było to wcale tak ciężkie, jak przypuszczałem. Poszło całkiem gładko i w większości bez problemów. Z pomocą przyszedł mi <a href="https://cakebuild.net">Cake Bauild</a>, czyli narzędzie do automatyzacji procesu budowy aplikacji i rzeczy z tym związanych. W Cake’u piszemy przy pomocy C# i mamy do dyspozycji zestawy funkcji, które sprawiają, że używanie go jest w miarę przyjemne.</p>
+
+<p>Obecnie, jeśli chcę odpalić testy dla kilku wersji Xamarin.Forms, wpisuję sobie wybrane wersje z nugeta do zmiennej, oddzielone średnikami, podłączam urządzenia (iPhone’a i Androida) do Maca, uruchamiam skrypt i czekam. Całość może potrwać długo, w zależności od tego ile wersji Formsów wybraliśmy, ale w międzyczasie możemy zająć się czymś innym. Odpalam testy na Macu, ponieważ odpalanie testów UI dla iOS nie jest dostępne z Windowsa. Dlatego wygodniej po prostu zrobić wszystko z Maca. Chyba, że zależy nam na czasie. Wtedy możemy bez problemu odpalić testy dla iOS na Macu, a dla Androida na drugim komputerze z Windowsem.</p>
+
+<p>Dodałem również drobną automatyzację do kopiowania wyników testów do projektu webowego, żebym nie musiał o tym pamiętać.</p>
+
+<h4 id="aktualizacja-prezentacji-wyników">Aktualizacja prezentacji wyników</h4>
+
+<p>Obecnie <a href="http://xamformsperf.azurewebsites.net">na stronie z wynikami</a> możemy obejrzeć wyniki dla 10 wersji Xamarin.Forms, zarówno dla Androida jak i iOS. W międzyczasie aktualizowałem iOSa na swoim iPhone’ie, dlatego nie wszystkie testy są wykonane na tej samej wersji systemu. Co widać! Przynajmniej na pierwszych dwóch wykresach, gdzie ogólne czasy są bardzo niskie. W „App Init” na iOS 11.2.1 czas zawsze wynosił 13 ms, a na iOS 11.2.2 już 15 ms. Z powodu małych liczb, różnica wynosi aż kilkanaście procent i jest wyraźnie widoczna na wykresie.</p>
+
+<p>Pierwsza myśl po spojrzeniu na wykres, byłaby taka, że to wina Xamarin.Forms! Dlatego żeby nikogo to nie zmyliło, <strong>dodaję informację pod tytułem testu, jeśli nie wszystkie testy są wykonane na tym samym modelu urządzenia lub wersji systemu</strong>. Dodatkowo możemy sprawdzić model urządzenia i wersję systemu po najechaniu na kolumnę na wykresie. Niestety nie posiadam jeszcze dokładnego modelu iPhone’a, co zauważyłem dopiero później, więc będę musiał to poprawić.</p>
+
+<h4 id="następne-kroki">Następne kroki</h4>
+
+<p>Cieszę się, że udało mi się zautomatyzować tyle rzeczy w tym projekcie. Przyszłe prace powinny być o wiele bardziej przyjemne, ponieważ nie muszę już wykonywać wielu żmudnych czynności.</p>
+
+<p>Kolejną rzeczą, którą chcę zrobić, jest dodanie większej ilości różnych testów. Zwłaszcza dla bardziej skomplikowanych przypadków, gdzie nie testujemy jednej funkcji, czy kontrolki. Dodatkowo warto przemyśleć aplikację webową pod kątem tego, co da się poprawić w prezentacji wyników i co będzie najważniejsze dla zaglądających tam osób.</p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="Xamarin" /><summary type="html"><![CDATA[Od poprzedniego wpisu minęło więcej czasu niż planowałem. Zeszło mi jednak trochę z tym co robiłem, a i ten wpis nie będzie zbyt długi, bo przedstawię tylko postęp prac w moim projekcie odnośnie badania wydajności Xamarin.Forms między kolejnymi wersjami. W oddzielnych wpisach chciałbym dokładniej przestawiać narzędzia, z których miałem okazję korzystać (a przy okazji nauczyć się) podczas prac.]]></summary></entry><entry><title type="html">Praca z designerem dla Xamarin.iOS</title><link href="http://localhost:4000/2018/01/14/praca-designerem-dla-xamarin-ios/" rel="alternate" type="text/html" title="Praca z designerem dla Xamarin.iOS" /><published>2018-01-14T19:11:22+01:00</published><updated>2018-01-14T19:11:22+01:00</updated><id>http://localhost:4000/2018/01/14/praca-designerem-dla-xamarin-ios</id><content type="html" xml:base="http://localhost:4000/2018/01/14/praca-designerem-dla-xamarin-ios/"><![CDATA[<p>W dzisiejszym wpisie chciałbym opowiedzieć o swoich doświadczeniach z pracy z designerem, gdy tworzymy aplikacje na iOS. Doświadczenia te są różne i prawdę mówiąc gorsze niż oczekiwałem, gdy dopiero zaczynałem .</p>
+
+<h4 id="jak-tworzymy-widoki-dla-ios">Jak tworzymy widoki dla iOS?</h4>
+
+<p>Widoki na iOS możemy tworzyć na kilka sposobów. Podstawowy podział to tworzenie ich w kodzie lub w designerze. W tym drugiej opcji do dyspozycji mamy 2 sposoby:</p>
+
+<ul>
+  <li>Xib – starszy sposób tworzenia widoków. Jeden plik to jeden widok. Ma pewne ograniczenia w stosunku do storyboardów, o których niżej.</li>
+  <li>Storyboard – nowszy sposób tworzenia widoków. Jest bardzo podobny do xibów, ale ma kilka ulepszeń. <strong>W jednym pliku storyboard możemy mieć kilka widoków</strong>, dodajemy je razem z ich kontrolerami. Widoki możemy łączyć nawigacją (segue) bezpośrednio w designerze. <strong>Dodatkową zaletą storyboardów jest obecność LayoutGuides</strong>, do których można dodawać ograniczenia Autolayoutu (o Autolayoucie trochę niżej). Przykładowo mamy TopLayoutGuide. Jeśli dodamy do niego ograniczenie Autolayout zamiast po prostu do góry widoku, wtedy nasza kontrolka będzie wyświetlać się pod status barem (ten z godziną). Co prawda w iOS 11 zostało to zastąpione przez SafeAreaLayoutGuide ze względu na iPhone X.</li>
+</ul>
+
+<h4 id="rozmiary-i-auto-layout">Rozmiary i Auto Layout</h4>
+
+<p>Kiedyś widoki w iOS tworzyło się po prostu określając rozmiary kontrolek. Określaliśmy jej pozycję oraz wysokość i szerokość. Wydaje mi się, że był pewien mechanizm, który to ułatwiał, ale było to dawno temu i nie miałem okazji go używać. Później pojawił się Auto Layout, który działa podobnie jak RelativeLayout z Androida, czyli określamy jak kontrolki są położone względem siebie. <strong>AutoLayout jest jednak bardziej elastyczny i ma więcej możliwości.</strong> Tworzenie widoków z nim jest całkiem wygodne… dopóki nie zaczniemy tworzyć czegoś skomplikowanego. Wtedy często musimy się męczyć z ustaleniem odpowiednich zależności, czy poszukać innego rozwiązania problemu. Jednak o tym pewnie będę pisał innym razem.</p>
+
+<h4 id="jak-jest-z-xamarinem">Jak jest z Xamarinem?</h4>
+
+<p>Tu również możemy tworzyć widoki w kodzie i w designerze. Ale możemy ten podział jeszcze powiększyć. Co mamy dostępne</p>
+
+<ul>
+  <li>Designer w Visual Studio</li>
+  <li>Designer w Visual Studio for Mac</li>
+  <li>xCode</li>
+  <li>Kod</li>
+</ul>
+
+<p>Omówmy każdy z tych sposobów po kolei.</p>
+
+<h4 id="designer-w-visual-studio-na-windowsie">Designer w Visual Studio na Windowsie</h4>
+
+<p>Jest on kopią designera z Visual Studio for Mac. I co ciekawe designer ten jest zupełnie inny niż tego w xCode. Zastanawiam się skąd ta inwencja twórcza w zespole Xamarina. Możemy używać tu Auto Layoutu, możemy robić właściwie wszystko to co na Macu. <strong>Ale jeśli chcecie zachować zdrowie psychiczne, to proszę, nie używajcie tego narzędzia.</strong> Część rzeczy tu po prostu nie działa. Klikasz coś i nic się nie dzieje. Na dłuższą metę nie da się tu poważnie pracować. Na krótszą metę też jest bardzo ciężko.</p>
+
+<h4 id="designer-w-visual-studio-for-mac">Designer w Visual Studio for Mac</h4>
+
+<p>Ten designer radzi już sobie lepiej. Widać, że Xamarin włożył w niego więcej pracy. <strong>Da się tu pracować, jeśli byśmy musieli, ale nigdy nie powiedziałbym, że jest to wygodna praca.</strong> Tutaj też zdarzają się błędy albo po prostu niektóre rzeczy nie są rozwiązane zbyt wygodnie. Na plus jednak trzeba zaliczyć własne podwidoki. Jeśli stworzymy sobie jakąś kontrolkę w kodzie, powiedzmy proste pole do wpisywania z nagłówkiem, to taką kontrolkę możemy dodać przez designer i będziemy widzieli jej podgląd. To samo powinno dać się zrobić na Windowsie, ale nigdy nie dotarłem tam aż tak daleko. Minusem z kolei jest to, że podgląd dla naszych customowych podwidoków stworzonych w oddzielnych plikach xib nie działa. Takie podwidoki będą się wyświetlać po prostu jako biały prostokąt.</p>
+
+<h4 id="xcode">xCode</h4>
+
+<p>Czyli natywne narzędzie do pracy z aplikacjami iOS przeznaczone dla Swifta i Objective-C. Tutejszy designer nazywa się Interface Builder. Możemy w nim pracować także z aplikacjami Xamarina. W Visual Studio for Mac wystarczy kliknąć prawym przyciskiem myszy na plik xib, czy storyboard i wybrać Otwórz w -&gt; Interface Builder. Ten designer działa poprawnie. Zdarzają się jakieś zgrzyty, czasami widok nie wyświetli się poprawnie, ale <strong>jest to na pewno najbardziej rozwinięte i najbardziej dopracowane narzędzie z trzech wymienionych</strong>. Tutaj przez większość czasu można po prostu pracować (komfort, który wydawałoby się, powinno zapewniać każde narzędzie). Minusem będzie to, że customowe podwidoki, stworzone przez nas w C# (a nie w xibie), będą się tu wyświetlać jako białe prostokąty. Dodatkowo, xCode nie widzi naszych customowych podwidoków i nie możemy ich dodawać do obecnie tworzonego widoku. Musimy taki podwidok dodać w designerze w Visual Studio for Mac.</p>
+
+<h4 id="kod">Kod</h4>
+
+<p>Cóż, tu nie ma właściwie problemów. Nie ma żadnego podglądu i nie trzeba się niczym martwić. Dodatkowym plusem jest to, że przy niestandardowych rzeczach i tak czasami trzeba użyć kodu. Jeśli jesteśmy z nim obeznani, to pójdzie nam szybciej. Dla niektórych może przeszkadzać brak podglądu, ale w designerach i tak zazwyczaj nie jest on idealny.</p>
+
+<h4 id="czcionki-i-napisy">Czcionki i napisy</h4>
+
+<p>W kodzie możemy bez problemu ustawić czcionkę, jej typ i rozmiar dla wszystkich tekstów. W designerach też. Jeśli jest to jakaś niestandardowa czcionka, to dodajemy ją do projektu oraz do Info.plist i będzie ona widoczna z poziomu designera. <strong>Wyjątkiem będzie tu sytuacja, gdy chcemy stworzyć AttribuedText i zbindować do niego wartość.</strong> AttributedText to tekst gdzie używamy różnych czcionek, rozmiarów, kolorów w jednym tekście. Jeśli jest on ustalany dynamicznie, to musimy stworzyć go kodem. Ogólnie rzecz biorąc, jeśli tekst jest dynamiczny, nawet jeśli chodzi tylko o tłumaczenie, to trzeba go ustawiać kodem.</p>
+
+<h4 id="kolory">Kolory</h4>
+
+<p>Kolejną sprawą, która jest ważna są kolory. Często ustawiamy kolory dla tła, czy napisów. Możemy to zrobić w każdym designerze. Ale co jeśli będziemy chcieli zmienić kolor wszystkich napisów z czarnego na ciemny szary? Musimy otwierać każdy widok i po kolei wszystko zmieniać? To strasznie dużo pracy! Z jednej strony da się zapisać kolory w palecie kolorów i używać ich w różnych miejscach. <strong>Jednak najprawdopodobniej chcemy dzielić kolory w kodzie i designerze.</strong> Czasami trzeba ich użyć tu, czasami tu, a nie będziemy przecież deklarować ich po kilka razy i potem zmieniać w paru miejscach.</p>
+
+<p>Dlatego <strong>nowszym rozwiązaniem jest dodawanie ich do Asset Catalog</strong>. Jest to miejsce gdzie można też dodawać ikonki, czy obrazki w różnych rozmiarach (lub wektory). Stamtąd możemy ich używać i w designerze (a przynajmniej w xCode, reszty nie pamiętam, bo później już za bardzo ich nie używałem) i w kodzie. Jedyne ale jest takie, że… <strong>działa to tylko od iOS 11</strong>. Jeśli chcemy wspierać wcześniejsze wersje (a na razie pewnie chcemy) i mieć jedno miejsce do deklaracji kolorów, to pozostaje nam tylko robić to w kodzie, a następnie przypisywać wszystkie kolory do kontrolek w kodzie. Jest to więcej pracy, ale na chwilę obecną jest to chyba najlepsze wyjście, bo zyskujemy tu na przejrzystości i projekt jest łatwiejszy w utrzymaniu.</p>
+
+<p>Dodatkowo, jeśli dodamy do Asset Catalog kolor (co robimy przez xCode), to nie możemy go przeglądać w Visual Studio for Mac. Po prostu przestaje się uruchamiać. Najwidoczniej funkcja ta nie jest jeszcze wspierana.</p>
+
+<h4 id="co-polecam">Co polecam?</h4>
+
+<p>Jeśli pracujemy na Windowsie a Maca mamy tylko jako build server, to właściwie nie mamy wyjścia – <strong>pozostaje tylko kod</strong>, bo designer do niczego się nie nadaje. Jednak jeśli pracujemy na Macu, to <strong>również skłaniałbym się ku kodowi</strong>. Wydaje mi się, że praca z kodem sprawia najmniej problemów i idzie sporo szybciej. Łatwiej jest ten kod współdzielić. Co prawda, kodu tworzącego widoki będzie sporo, ale w miarę łatwo i szybko można stworzyć sobie pomocnicze metody dla najważniejszych kontrolek, tak żeby skrócić powtarzające się instrukcje. <strong>Jest to w miarę ważne i warto zadbać o to na początku, bo po pewnym czasie zauważmy, że klepiemy ciągle to samo.</strong> W designerze nie mamy szans iść na skróty. Dodatkowo, czasami napotykamy wyjątki, które dotyczą tylko widoków z designera. Spędziłem nad nimi trochę czasu i wydaje mi się, że po prostu nie warto.</p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="Xamarin" /><summary type="html"><![CDATA[W dzisiejszym wpisie chciałbym opowiedzieć o swoich doświadczeniach z pracy z designerem, gdy tworzymy aplikacje na iOS. Doświadczenia te są różne i prawdę mówiąc gorsze niż oczekiwałem, gdy dopiero zaczynałem .]]></summary></entry><entry><title type="html">Xamarin.Forms Performance - aktualizacja warstwy prezentacji</title><link href="http://localhost:4000/2018/01/10/xamarin-forms-performance-aktualizacja-warstwy-prezentacji/" rel="alternate" type="text/html" title="Xamarin.Forms Performance - aktualizacja warstwy prezentacji" /><published>2018-01-10T21:21:41+01:00</published><updated>2018-01-10T21:21:41+01:00</updated><id>http://localhost:4000/2018/01/10/xamarin-forms-performance-aktualizacja-warstwy-prezentacji</id><content type="html" xml:base="http://localhost:4000/2018/01/10/xamarin-forms-performance-aktualizacja-warstwy-prezentacji/"><![CDATA[<p>Już wcześniej wspominałem o swoim projekcie odnośnie testowania wydajności kolejnych wersji Xamarin.Forms. Wpisy temu poświęcone znajdziecie [tutaj]/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/) oraz [tutaj]/2017/12/24/xamarin-forms-performance-warstwa-prezentacji/).</p>
+
+<p>W ostatnich dniach znalazłem trochę czasu, żeby zaktualizować ten projekt. Zrobiłem 3 rzeczy, na których na chwilę obecną najbardziej mi zależało:</p>
+
+<ol>
+  <li>Zaktualizowałem prezentację wyników. Teraz <strong>zamiast tabelek widzimy ładne wykresy</strong>. Do każdego testu mamy jeden wykres, który pokazuje czas wykonywania testu dla każdej wersji oraz procentową różnicę. Kolejne kolumny są czerwone lub zielone w zależności od tego czy wynik się pogorszył, czy poprawił od poprzedniej wersji.</li>
+  <li>Dodałem zakładkę dla iOSa na stronie.</li>
+  <li><strong>Wykonałem testy w trybie Release na prawdziwych urządzeniach</strong> w kilku wersjach Xamarin.Forms. Chciałem wykonać te testy dla jeszcze wcześniejszych wersji Xamarin.Forms, ale niestety miałem problemy ze zbudowaniem aplikacji. Dałem sobie więc na razie spokój. Obecnie ważniejsze są aktualne wersje, a testy dla starszych chciałem wykonać raczej z ciekawości.</li>
+</ol>
+
+<p>Dla przypomnienia, obecny adres strony z wynikami to: <a href="http://xamformsperf.azurewebsites.net">http://xamformsperf.azurewebsites.net</a></p>
+
+<h4 id="komentarz-do-wyników">Komentarz do wyników</h4>
+
+<p>Są to już wyniki z trybu Release, z urządzeń, więc można się pokusić o pewien komentarz. Na androidzie widać, że są pewne różnice w wynikach, raz na plus, raz na minus. Widać, że <strong>wersja 2.4.0.91020 im się udała</strong> i był tam pewien wzrost wydajności. W wersji 2.5.0.91635 jednak nie było już tak dobrze. Jeśli chodzi o iOS to wyniki są wszędzie niemal takie same. Jest to aż trochę ciężkie do uwierzenia. Myślę, że będę się musiał temu jeszcze przyjrzeć.Testy były wykonywane jako testy ui po 10 razy, a na koniec obliczana była średnia i ten wynik jest wyświetlany na stronie.</p>
+
+<h4 id="przyszły-rozwój">Przyszły rozwój</h4>
+
+<p>Jak na razie wybrałem tylko kilka wersji Xamarin.Forms. Chciałem już opublikować stronę w miarę używalnej wersji, tak żeby przynosiła pewną wartość. Od tego miejsca można ten projekt dalej rozwijać. To co chciałbym zrobić w następnej kolejności to:</p>
+
+<ul>
+  <li>Napisanie większej ilości testów, np. dla różnych konfiguracji layoutów i podwidoków</li>
+  <li>Większa automatyzacja. Obecnie muszę zmieniać wersję Xamarin.Forms ręcznie, podobnie budować aplikację, deployować ją i odpalać testy. Gdyby udało się choć trochę zautomatyzować ten proces, aktualizacja wyników dla nowych wersji i nowych testów byłaby o wiele wygodniejsza.</li>
+</ul>
+
+<p>To wszystko na chwilę obecną. Jeśli macie jakieś uwagi, czy propozycje, chętnie ich wysłucham. Zapraszam do zostawiania komentarzy.</p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="Xamarin" /><summary type="html"><![CDATA[Już wcześniej wspominałem o swoim projekcie odnośnie testowania wydajności kolejnych wersji Xamarin.Forms. Wpisy temu poświęcone znajdziecie [tutaj]/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/) oraz [tutaj]/2017/12/24/xamarin-forms-performance-warstwa-prezentacji/).]]></summary></entry><entry><title type="html">Picker dla Xamarin.iOS z MvvmCross - aktualizacja</title><link href="http://localhost:4000/2018/01/01/picker-dla-xamarin-ios-mvvmcross-aktualizacja/" rel="alternate" type="text/html" title="Picker dla Xamarin.iOS z MvvmCross - aktualizacja" /><published>2018-01-01T16:31:40+01:00</published><updated>2018-01-01T16:31:40+01:00</updated><id>http://localhost:4000/2018/01/01/picker-dla-xamarin-ios-mvvmcross-aktualizacja</id><content type="html" xml:base="http://localhost:4000/2018/01/01/picker-dla-xamarin-ios-mvvmcross-aktualizacja/"><![CDATA[<p>Zaktualizowałem swój plugin do MvvmCross z pickerem, o którym [niedawno pisałem]/2017/11/26/picker-dla-xamarin-ios-mvvmcross/).</p>
+
+<p>Co się zmieniło?</p>
+
+<ul>
+  <li>Najważniejsza rzecz to dodanie obsługi obrazków. Picker może teraz nie tylko wyświetlać tekst, ale też ikonki. Dla obrazków można ustawić rozmiar oraz wyrównanie w poziomie:</li>
+</ul>
+
+<div class="oembed-gist"><script src="https://gist.github.com/tomwis/9f1d6f612aca75af68bf2d0b017f89be.js"></script><noscript>View the code on [Gist](https://gist.github.com/tomwis/9f1d6f612aca75af68bf2d0b017f89be).</noscript></div>
+<ul>
+  <li>Zmieniłem przycisk „Done” w toolbarze na przycisk systemowy, który jest automatycznie tłumaczony. Przy okazji usunąłem też właściwość do zmiany tekstu na przycisku „Done”, bo teraz nie jest już potrzebny.</li>
+  <li>Dodałem metodę do dodawania przycisków do toolbara, po lewej stronie od „Done”. Metoda nazywa się <code class="language-plaintext highlighter-rouge">AddButtonToToolbar</code></li>
+  <li>Przetestowałem również plugin z najnowszą wersją MvvmCross (5.6.2). Wcześniej zrobiłem to tylko ze starą wersją 4.4.0. Powinien działać od wersji 4.4.0 wzwyż. Jeśli tak nie jest, dajcie znać.</li>
+</ul>
+
+<p>To tyle na dzisiaj. Jeszcze tylko przypomnę link do nugeta:</p>
+
+<p><a href="https://www.nuget.org/packages/MvxPlugins.Picker.iOS">https://www.nuget.org/packages/MvxPlugins.Picker.iOS</a></p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="Xamarin" /><summary type="html"><![CDATA[Zaktualizowałem swój plugin do MvvmCross z pickerem, o którym [niedawno pisałem]/2017/11/26/picker-dla-xamarin-ios-mvvmcross/).]]></summary></entry><entry><title type="html">Xamarin.Forms Performance - warstwa prezentacji</title><link href="http://localhost:4000/2017/12/24/xamarin-forms-performance-warstwa-prezentacji/" rel="alternate" type="text/html" title="Xamarin.Forms Performance - warstwa prezentacji" /><published>2017-12-24T13:18:13+01:00</published><updated>2017-12-24T13:18:13+01:00</updated><id>http://localhost:4000/2017/12/24/xamarin-forms-performance-warstwa-prezentacji</id><content type="html" xml:base="http://localhost:4000/2017/12/24/xamarin-forms-performance-warstwa-prezentacji/"><![CDATA[<p>Jest to drugi post z cyklu XFP, o sprawdzaniu wydajności Xamarin.Forms. <a href="/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/">Ostatnio opisywałem aplikację</a>, dzięki której można łatwo sprawdzić wydajność nowej wersji Xamarin.Forms. Trzeba ją jeszcze dopracować, ale są już podstawy. Teraz do tych podstaw dołącza kolejna warstwa – prezentacja wyników.</p>
+
+<h4 id="aplikacja-webowa">Aplikacja Webowa</h4>
+
+<p>Jeśli zbudowałbym tę aplikację i nigdzie nie dzielił się wynikami na bieżąco, to pewnie prawie nikt by z niej nie korzystał. Niby dużo ułatwia, ale i tak mało komu by się chciało. Dlatego myślałem nad sposobem prezentacji wyników. Najprostszym sposobem wydaje mi się Azure App Service. Można tam wrzucić aplikację webową (ASP.NET MVC) i nic za to nie płacić – jest dostępny darmowy pakiet.</p>
+
+<p>Kod aplikacji webowej przechowuję na githubie, razem z aplikacją mobilną: <a href="https://github.com/tomwis/XamFormsPerf">https://github.com/tomwis/XamFormsPerf</a></p>
+
+<p>Usługa na Azure jest o tyle fajna, że można do niej podłączyć githuba i sama będzie pobierać i budować projekt. Jest to spore ułatwienie.</p>
+
+<p>Obecnie stronę można znaleźć pod tym adresem: <a href="http://xamformsperf.azurewebsites.net/">http://xamformsperf.azurewebsites.net</a></p>
+
+<p>Jeszcze za dużo tu nie ma. Na razie tylko prezentacja wyników dla poszczególnych testów w tabelkach (i to tylko dla Androida). Każdy test pokazuje czas wykonania w milisekundach dla każdej wersji Xamarin.Forms. W ostatniej kolumnie możemy zobaczyć o ile procent szybsza/wolniejsza jest nowa wersja w stosunku do poprzedniej (poprzedniej w tabelce, dla jasności). Na razie są to tylko testowe pomiary, ale niedługo będę chciał podmienić je na prawidłowe, wykonane na prawdziwym urządzeniu. Dodatkowo, będę chciał też dodać prezentację wyników w postaci wykresów. Na pewno będzie to łatwiejsze w odbiorze niż takie tabelki.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Powoli klaruje się wizja tego projektu. Mam nadzieję, że wyjdzie z niego coś dobrego i przyda się społeczności Xamarin.Forms 🙂</p>
+
+<p>Obecnie samo odpalanie testów i określanie wersji Xamarin.Forms dla aplikacji mobilnej odbywa się ręcznie. Fajnie byłoby to także zautomatyzować, ale musiałbym wtedy używać Test Cloud, który trochę kosztuje, co jest niezbyt dobrą wiadomością dla takiego projektu open-source. No cóż, pomyślę jeszcze nad tym.</p>
+
+<p>W dalszych etapach chciałbym dodać więcej różnorodnych testów oraz przetestować testy ui dla iOSa. A co z UWP? Na razie chyba sobie daruję, bo zainteresowanie pewnie nie byłoby zbyt wielkie.</p>
+
+<p>Jeśli masz jakieś uwagi, pomysły, sugestie, to bardzo chętnie o nich przeczytam w komentarzach.</p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="Xamarin" /><summary type="html"><![CDATA[Jest to drugi post z cyklu XFP, o sprawdzaniu wydajności Xamarin.Forms. Ostatnio opisywałem aplikację, dzięki której można łatwo sprawdzić wydajność nowej wersji Xamarin.Forms. Trzeba ją jeszcze dopracować, ale są już podstawy. Teraz do tych podstaw dołącza kolejna warstwa – prezentacja wyników.]]></summary></entry><entry><title type="html">Sprawdzanie wydajności w Xamarin.Forms</title><link href="http://localhost:4000/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/" rel="alternate" type="text/html" title="Sprawdzanie wydajności w Xamarin.Forms" /><published>2017-12-17T12:08:15+01:00</published><updated>2017-12-17T12:08:15+01:00</updated><id>http://localhost:4000/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms</id><content type="html" xml:base="http://localhost:4000/2017/12/17/sprawdzanie-wydajnosci-xamarin-forms/"><![CDATA[<p>Kiedyś zdarzyło mi się przeprowadzić testy wydajnościowe Xamarina. Porównywałem Xamarin.Forms do Xamarin.Android i do aplikacji w Javie. Testy te robiłem wtedy tylko dla Androida. Wyniki możecie obejrzeć <a href="https://amellsoftware.com/2016/07/28/android-performance-java-vs-xamarin-vs-xamarin-forms/">tutaj</a> oraz <a href="https://amellsoftware.com/2016/08/04/android-performance-java-vs-xamarin-vs-xamarin-forms-part-2/">tutaj</a>. Ogólnie rzecz biorąc, nie były one dobre dla Xamarin.Forms.</p>
+
+<h4 id="xamarinforms--czy-następna-wersja-będzie-wydajniejsza">Xamarin.Forms – czy następna wersja będzie wydajniejsza?</h4>
+
+<p>Jakiś czas temu, przeglądając forum Xamarina, natknąłem się na pomysł stworzenia aplikacji, która mierzyłaby wydajność Xamarin.Forms pomiędzy kolejnymi wersjami. Chodzi głównie o to, żeby zobaczyć, czy są wykonywane jakieś optymalizacje, czy może wydajność spada i w jakich obszarach się to dzieje. Był to pomysł podsunięty zespołowi Xamarina, ale znając życie, niewiele się w tym temacie u nich dzieje 🙂 Dlatego ostatnio zacząłem sam pracować nad taką aplikacją (nazwa robocza XFP) i posiadam jakiś pierwszy prototyp. Obecnie aplikacja mierzy 7 rzeczy:</p>
+
+<ul>
+  <li>Czas wykonywania metody <code class="language-plaintext highlighter-rouge">Forms.Init()</code></li>
+  <li>Czas wykonywania metody <code class="language-plaintext highlighter-rouge">LoadApplication()</code></li>
+  <li>Czas do pojawienia się pierwszego widoku (początek – przed metodą <code class="language-plaintext highlighter-rouge">Forms.Init()</code>, koniec – w <code class="language-plaintext highlighter-rouge">OnAppearing()</code> pierwszej strony)</li>
+  <li>Czas tworzenia i renderowania kontrolki <code class="language-plaintext highlighter-rouge">BoxView</code></li>
+  <li>Czas tworzenia i renderowania kontrolki <code class="language-plaintext highlighter-rouge">Button</code></li>
+  <li>Czas tworzenia i renderowania kontrolki <code class="language-plaintext highlighter-rouge">Label</code></li>
+  <li>Czas tworzenia i renderowania kontrolki <code class="language-plaintext highlighter-rouge">Image</code></li>
+</ul>
+
+<p>Na razie tylko tyle, chociaż jeśli będzie to dobrze wyglądać, to planuję dodać sporo więcej testów sprawdzających także inne kontrolki, layouty, różne ich kombinacje, itp.</p>
+
+<p>Obecnie, aplikację można pobrać z Githuba: <a href="https://github.com/tomwis/XamFormsPerf">https://github.com/tomwis/XamFormsPerf</a></p>
+
+<p>Działa dla Androida, iOSa i UWP. Gdy uruchomimy aplikację testy zaczynają się automatycznie i po momencie dostaniemy podsumowanie. Możemy również wykonać kilka pętli testów i dostaniemy uśredniony wynik.</p>
+
+<h4 id="automatyzacja">Automatyzacja</h4>
+
+<p>Jednak takie testy najlepiej jeszcze bardziej zautomatyzować – za pomocą testów UI. Co robi taki test:</p>
+
+<ul>
+  <li>Otwiera aplikację – tu następnie testy w aplikacji wykonują się automatycznie</li>
+  <li>Pobiera podsumowanie testów i zapisuje je w pliku .csv</li>
+  <li>Powtarza powyższe w ilu pętlach chcemy</li>
+</ul>
+
+<p>Dodałem wykonywanie testów w pętlach, ponieważ dobrze jest wykonać takie testy przynajmniej kilka razy i uśrednić wynik. Taki uśredniony wynik również otrzymamy na koniec w oddzielnym pliku csv.</p>
+
+<p>Na razie stworzyłem takie testy tylko dla Androida, ponieważ Xamarin.UITest nie wspiera UWP, a testów dla iOS nie da się pisać na Windowsie 🙂 Resztę postaram się dopisać w miarę możliwości nieco później.</p>
+
+<p>Testy najlepiej wykonywać albo zawsze na tym samym urządzeniu albo od nowa dla wszystkich interesujących nas wersji Xamarin.Forms. Druga metoda być może jest nawet lepsza, bo wtedy wiemy, że testujemy na urządzeniu w podobnym stanie, z tą samą wersję systemu, itp. Wyniki powinny być w ten sposób bardziej miarodajne.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Zobaczymy, czy pomysł się sprawdzi i czy dostanę z tego jakieś użyteczne dane. Najlepiej byłoby prezentować te dane gdzieś online, z ładnymi wykresami, tabelkami i porównaniami między wersjami. Zobaczymy.</p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="Xamarin" /><summary type="html"><![CDATA[Kiedyś zdarzyło mi się przeprowadzić testy wydajnościowe Xamarina. Porównywałem Xamarin.Forms do Xamarin.Android i do aplikacji w Javie. Testy te robiłem wtedy tylko dla Androida. Wyniki możecie obejrzeć tutaj oraz tutaj. Ogólnie rzecz biorąc, nie były one dobre dla Xamarin.Forms.]]></summary></entry><entry><title type="html">LiveXAML - podgląd UI dla Xamarin.Forms w czasie rzeczywistym</title><link href="http://localhost:4000/2017/12/10/livexaml-podglad-ui-dla-xamarin-forms-czasie-rzeczywistym/" rel="alternate" type="text/html" title="LiveXAML - podgląd UI dla Xamarin.Forms w czasie rzeczywistym" /><published>2017-12-10T12:02:05+01:00</published><updated>2017-12-10T12:02:05+01:00</updated><id>http://localhost:4000/2017/12/10/livexaml-podglad-ui-dla-xamarin-forms-czasie-rzeczywistym</id><content type="html" xml:base="http://localhost:4000/2017/12/10/livexaml-podglad-ui-dla-xamarin-forms-czasie-rzeczywistym/"><![CDATA[<p>Jedną z bolączek Xamarina jest to, że czasami podczas budowania aplikacji pojawiają się dziwne problemy, które nie co końca wiadomo jak rozwiązać. Często pomocne jest usunięcie folderów bin/obj, czy restart Visual Studio. Jeśli już projekt się buduje to trochę czasu może to potrwać. Chyba zależy to od humoru Visuala 🙂 Zawsze zastanawiałem się, jak na różnych prezentacjach, czy w Xamarin University, projekty odpalają się niemal natychmiast. Prezentujący i tak mówi „trzeba chwilę poczekać”, a ja tylko sobie myślę „żebyś ty człowieku zobaczył jak to u mnie działa…”.</p>
+
+<p>Niemniej jednak, jednym z obejść dla tego problemu jest podgląd UI na żywo w aplikacji. Jest to obejście częściowe, bo pomaga tylko przy projektowaniu wyglądu w xamlu, ale jest to pewna pomoc.</p>
+
+<h4 id="xamarin-live-player">Xamarin Live Player</h4>
+
+<p>Jakiś czas temu Xamarin pokazał <a href="https://www.xamarin.com/live">Live Player</a>. Jest to aplikacja, którą instalujemy na naszym smartfonie i dzięki niej możemy widzieć na żywo zmiany wprowadzane w kodzie w Visualu. Nie używałem jeszcze tej funkcji, ponieważ nadal jest w preview i trzeba zainstalować dla niej wersję preview Visual Studio. Nie mogę się więc wypowiedzieć jak działa, ale znając jakoś stabilnych wydań Xamarina, domyślam się, że przed nami jeszcze daleka droga. Live Player nie działa także z emulatorami, trzeba korzystać z fizycznego urządzenia (sprostowanie: od czasu gdy pisałem ten post, Xamarin zdążył wydać już Live Player w stabilnej wersji Visuala, więc może niedługo coś o nim napiszę).</p>
+
+<h4 id="livexaml">LiveXAML</h4>
+
+<p><a href="http://www.livexaml.com">LiveXAML</a> pozwala nam na podgląd zmian w plikach xaml w odpalonej aplikacji. Działa z i bez debugowania. Możemy z niego korzystać na emulatorach oraz urządzeniach (w tej samej sieci).</p>
+
+<p>Gdy zrobimy jakąś zmianę, musimy zapisać plik i widok się odświeża. Z krótkiej zabawy tym narzędziem mogę powiedzieć, że działają wszystkie podstawowe modyfikacje. Również zmiany właściwości <code class="language-plaintext highlighter-rouge">Padding</code> czy <code class="language-plaintext highlighter-rouge">Margin</code>. Odnoszę się do nich, ponieważ Microsoft wprowadził podobną funkcję do xamla dla UWP, jednak tam nie można zmieniać marginesów, bo aplikacja się wywala 🙂 W LiveXAML nie ma tego problemu. Działają również custom renderery i efekty.</p>
+
+<p>Oczywiście, zmiany działają tylko dla xamla. Jeśli więc dojdziemy do momentu, gdzie musimy stworzyć konwerter, aplikację trzeba zatrzymać, napisać konwerter w C# i wtedy można wrócić do debugowania i podglądu na żywo. Podobnie z efektami i custom rendererami. Czasami więc trzeba robić przerwy. Jednak korzyści i tak są dużo. Nie musimy po każdej małej zmianie budować i odpalać aplikacji, co zazwyczaj zajmuje masę czasu.</p>
+
+<p>Nie ma tutaj co dużo pisać. Trzeba to po prostu wypróbować samemu 🙂</p>
+
+<h4 id="cena">Cena</h4>
+
+<p>LiveXAML to produkt niepochodzący od Xamarina i jest w większości płatny. Ma okres próbny, a po nim możemy używać go za darmo dla projektów z max. trzema plikami xamla. Jeśli mamy więc jakieś bardzo małe projekty lub tylko częściowo w xamlu (a częściowo w C#), to da się używać tego narządzia za darmo. W innym wypadku trzeba zapłacić. Jednak w większości przypadków prawdopodobnie warto. Zaoszczędzimy dzięki temu masę czasu i poniesiony koszt szybko się zwróci.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Deployment aplikacji Xamarin.Forms potrafi trwać długo i robienie tego przy każdej małej zmianie sprawi, że zmarnujemy masę czasu. Widziałem, że w innych technologiach, jak ReactNative, zmiany widoczne są w czasie rzeczywistym. Bardzo bym chciał, żeby, na ile to możliwe, był to też standard w Xamarinie. LiveXAML mocno przybliża nas do tego celu i życzę temu projektowi jak najlepiej. Mam nadzieję, że Xamarin i Microsoft szybko nadgonią i funkcja ta będzie wbudowana w Visuala. Skoro stworzyli coś podobnego dla UWP, to Xamarin powinien być następny w kolejce.</p>]]></content><author><name>Tomasz Wiśniewski</name></author><category term="Xamarin" /><summary type="html"><![CDATA[Jedną z bolączek Xamarina jest to, że czasami podczas budowania aplikacji pojawiają się dziwne problemy, które nie co końca wiadomo jak rozwiązać. Często pomocne jest usunięcie folderów bin/obj, czy restart Visual Studio. Jeśli już projekt się buduje to trochę czasu może to potrwać. Chyba zależy to od humoru Visuala 🙂 Zawsze zastanawiałem się, jak na różnych prezentacjach, czy w Xamarin University, projekty odpalają się niemal natychmiast. Prezentujący i tak mówi „trzeba chwilę poczekać”, a ja tylko sobie myślę „żebyś ty człowieku zobaczył jak to u mnie działa…”.]]></summary></entry></feed>

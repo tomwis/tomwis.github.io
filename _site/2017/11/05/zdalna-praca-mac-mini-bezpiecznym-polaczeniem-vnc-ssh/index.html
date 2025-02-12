@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Zdalna praca z Mac Mini z bezpiecznym połączeniem VNC przez SSH | Lazy Loading</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Zdalna praca z Mac Mini z bezpiecznym połączeniem VNC przez SSH" />
+<meta name="author" content="Tomasz Wiśniewski" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Jako programista Xamarina, który tworzy aplikacje na iOS muszę pracować z MacOS. Jest mi potrzebny do budowania aplikacji na iOS oraz do odpalania symulatora iPhone’a i iPada. Jednak moim głównym narzędziem jest sprzęt z Windowsem i na co dzień przesiaduję w Visual Studio. Jeśli mamy wersję Enterprise to możemy cieszyć się symulatorem bezpośrednio w Windowsie. Jeśli nie, to symulator odpali się na Macu i tam musimy go obsługiwać. Dodatkowo, co jakiś czas trzeba zajrzeć na Maca, żeby np. po aktualizacji Xcode zaakceptować regulamin albo żeby coś skonfigurować. Potrzebujemy więc wygodnego dostępu do Maca." />
+<meta property="og:description" content="Jako programista Xamarina, który tworzy aplikacje na iOS muszę pracować z MacOS. Jest mi potrzebny do budowania aplikacji na iOS oraz do odpalania symulatora iPhone’a i iPada. Jednak moim głównym narzędziem jest sprzęt z Windowsem i na co dzień przesiaduję w Visual Studio. Jeśli mamy wersję Enterprise to możemy cieszyć się symulatorem bezpośrednio w Windowsie. Jeśli nie, to symulator odpali się na Macu i tam musimy go obsługiwać. Dodatkowo, co jakiś czas trzeba zajrzeć na Maca, żeby np. po aktualizacji Xcode zaakceptować regulamin albo żeby coś skonfigurować. Potrzebujemy więc wygodnego dostępu do Maca." />
+<link rel="canonical" href="http://localhost:4000/2017/11/05/zdalna-praca-mac-mini-bezpiecznym-polaczeniem-vnc-ssh/" />
+<meta property="og:url" content="http://localhost:4000/2017/11/05/zdalna-praca-mac-mini-bezpiecznym-polaczeniem-vnc-ssh/" />
+<meta property="og:site_name" content="Lazy Loading" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-11-05T13:27:01+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Zdalna praca z Mac Mini z bezpiecznym połączeniem VNC przez SSH" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Tomasz Wiśniewski"},"dateModified":"2017-11-05T13:27:01+01:00","datePublished":"2017-11-05T13:27:01+01:00","description":"Jako programista Xamarina, który tworzy aplikacje na iOS muszę pracować z MacOS. Jest mi potrzebny do budowania aplikacji na iOS oraz do odpalania symulatora iPhone’a i iPada. Jednak moim głównym narzędziem jest sprzęt z Windowsem i na co dzień przesiaduję w Visual Studio. Jeśli mamy wersję Enterprise to możemy cieszyć się symulatorem bezpośrednio w Windowsie. Jeśli nie, to symulator odpali się na Macu i tam musimy go obsługiwać. Dodatkowo, co jakiś czas trzeba zajrzeć na Maca, żeby np. po aktualizacji Xcode zaakceptować regulamin albo żeby coś skonfigurować. Potrzebujemy więc wygodnego dostępu do Maca.","headline":"Zdalna praca z Mac Mini z bezpiecznym połączeniem VNC przez SSH","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/11/05/zdalna-praca-mac-mini-bezpiecznym-polaczeniem-vnc-ssh/"},"url":"http://localhost:4000/2017/11/05/zdalna-praca-mac-mini-bezpiecznym-polaczeniem-vnc-ssh/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Lazy Loading" /></head>
+<body><header class="site-header">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="/">Lazy Loading</a>
+    <nav class="site-nav">
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <span class="menu-icon">
+          <svg viewBox="0 0 18 15" width="18px" height="15px">
+            <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+          </svg>
+        </span>
+      </label>
+      <div class="trigger"><a class="page-link" href="/external-articles/">Zewnętrzne artykuły</a><a class="page-link" href="/about/">O mnie</a></div>
+    </nav>
+  </div>
+</header><main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Zdalna praca z Mac Mini z bezpiecznym połączeniem VNC przez SSH</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-11-05T13:27:01+01:00" itemprop="datePublished">Nov 5, 2017
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Tomasz Wiśniewski</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Jako programista Xamarina, który tworzy aplikacje na iOS muszę pracować z MacOS. Jest mi potrzebny do budowania aplikacji na iOS oraz do odpalania symulatora iPhone’a i iPada. Jednak moim głównym narzędziem jest sprzęt z Windowsem i na co dzień przesiaduję w Visual Studio. Jeśli mamy wersję Enterprise to możemy cieszyć się symulatorem bezpośrednio w Windowsie. Jeśli nie, to symulator odpali się na Macu i tam musimy go obsługiwać. Dodatkowo, co jakiś czas trzeba zajrzeć na Maca, żeby np. po aktualizacji Xcode zaakceptować regulamin albo żeby coś skonfigurować. Potrzebujemy więc wygodnego dostępu do Maca.</p>
+
+<p>Jeśli możemy mieć Maca pod ręką, to super – jest to prawdopodobnie najwygodniejsze rozwiązanie (być może oprócz pracy bezpośrednio na Macu – <a href="https://blog.damianantonowicz.pl/2017/08/16/dlaczego-przesiadlem-sie-na-mac-os-jako-programista-xamarin/">polecam wpis Damiana Antonowicza na ten temat</a>). Ale co jeśli chcemy pracować z Mac’iem zdalnie? Bo np. jest daleko od nas lub chcemy go schować w szafie, bo nie mamy już miejsca na biurku na kolejny sprzęt.</p>
+
+<h4 id="zdalne-logowanie">Zdalne logowanie</h4>
+
+<p>Po pierwsze musimy skonfigurować zdalne logowanie (remote login), zgodnie z <a href="https://developer.xamarin.com/guides/ios/getting_started/installation/windows/connecting-to-mac/">instrukcjami w dokumentacji Xamarina</a>. Jest to potrzebne, aby Visual Studio mógł połączyć się z Mac’iem do budowania aplikacji.</p>
+
+<h4 id="udostępnianie-ekranu">Udostępnianie ekranu</h4>
+
+<p>Jeśli chcemy widzieć pulpit Maca, to najprostszym sposobem jest skonfigurowanie udostępniania ekranu (screen sharing) – <a href="https://support.apple.com/kb/PH25554?locale=pl_PL">instrukcje tutaj</a>. Opiera się to na VNC. Jest to trochę inna technologia niż zdalny pulpit (RDP/remote desktop) w Windowsie. W skrócie, RDP przesyła przez sieć tylko informacje o obiektach (np. pozycja, rozmiar, kolor), a VNC przesyła całe zrzuty ekranu. Dlatego też <strong>wydajność VNC jest raczej słaba</strong> i jeśli mielibyśmy pracować tak cały dzień – nie dałoby rady. Do prostych zadań jednak w zupełności wystarczy.</p>
+
+<h4 id="klient-vnc">Klient VNC</h4>
+
+<p>Gdy mamy skonfigurowane udostępnianie ekranu na Macu, wtedy możemy zainstalować klienta VNC na Windowsie. Jest dostępnych kilka, m. in. <a href="http://www.tightvnc.com">TightVNC</a>, <a href="https://www.realvnc.com/en/">RealVNC</a>, <a href="http://www.uvnc.com">UltraVNC</a>. Osobiście używam RealVNC – najmilszy dla oka, a opcje podobne jak w innych (zresztą i tak za dużo pewnie nie będzie się ich używać). Do tego dostępne są aplikacje na Androida i iOSa, a więc możemy sterować Mac’iem nawet z telefonu. Mogłoby się wydawać, że jest to bardzo niewygodne, ale spróbowałem i nie było tak źle – pewnie sporo w tym zasługi dobrze zaplanowanego interfejsu/gestów.</p>
+
+<h4 id="bezpieczeństwo">Bezpieczeństwo</h4>
+
+<p><strong>Połączenie przez VNC nie jest szyfrowane.</strong> Przesyłamy więc przez sieć wszystkie dane w otwartej formie, a są tutaj też dane poufne, takie jak chociażby hasło. W sieci lokalnej to jeszcze pół biedy, ale jeśli Mac znajduje kompletnie gdzie indziej i przesyłamy dane przez sieć publiczną, to warto zadbać o bezpieczeństwo. RealVNC mógłby być tu najłatwiejszym rozwiązaniem, ponieważ po założeniu konta, nawet w darmowym planie, mamy szyfrowanie. Prawdopodobnie jest to dobre rozwiązanie, ja jednak byłem nastawiony do niego raczej niechętnie. Postanowiłem spróbować czegoś innego – ssh. Protokół ten szyfruje wszystkie dane. <strong>Możemy stworzyć tunel przez ssh do naszego Maca, a następnie połączyć się przez VNC do tunelu.</strong></p>
+
+<p>Aby to zrobić potrzebujemy klienta ssh do Windowsa. Najpopularniejszym jest <a href="http://www.putty.org">PuTTY</a>, ale mamy też inne, jak <a href="https://mremoteng.org">mRemoteNG</a>, czy <a href="http://mobaxterm.mobatek.net">MobaXterm</a> – dwa ostatnie są bardziej rozbudowane. Ja pokażę jak stworzyć tunel na podstawie Putty.</p>
+
+<ol>
+  <li>Otwieramy Putty i w pierwszym oknie (<code class="language-plaintext highlighter-rouge">Session</code>) w miejsce <code class="language-plaintext highlighter-rouge">xxx.xxx.xxx.xxx</code> wpisujemy IP naszego Maca. Port zostawiamy na 22 i typ na SSH.![]/wp-content/uploads/2017/09/putty1.png)</li>
+  <li>Przechodzimy w drzewku po lewej do <code class="language-plaintext highlighter-rouge">Connection -&gt; SSH -&gt; Tunnels</code>.![]/wp-content/uploads/2017/09/putty2.png)</li>
+  <li>Jako <code class="language-plaintext highlighter-rouge">Destination</code> wpisujemy IP Maca z portem dla VNC, domyślnie jest to 5900.</li>
+  <li>W <code class="language-plaintext highlighter-rouge">Source port</code> wpisujemy port lokalny pod jakim widoczne będzie połączenie.</li>
+  <li>Resztę zostawiamy jak jest, chyba że widzimy, że w naszym przypadku coś powinno być inaczej, jak np. <code class="language-plaintext highlighter-rouge">Remote</code> zamiast <code class="language-plaintext highlighter-rouge">Local</code>.</li>
+  <li>Możemy wrócić do zakładki <code class="language-plaintext highlighter-rouge">Session</code> i zapisać sesję pod dowolną nazwą (wpisujemy nazwę pod <code class="language-plaintext highlighter-rouge">Saved Sessions</code> i klikamy <code class="language-plaintext highlighter-rouge">Save</code>).</li>
+  <li>Uruchamiamy połączenie przyciskiem <code class="language-plaintext highlighter-rouge">Open</code>.</li>
+</ol>
+
+<p>Wyskoczy nam nowe okno, w którym będziemy musieli się zalogować do sesji ssh użytkownikiem i hasłem z naszego Maca. Wtedy w kliencie VNC zamiast podawać host/ip i port Maca, wpisujemy <code class="language-plaintext highlighter-rouge">localhost:5901</code> (lub inny port, jeśli podaliśmy inny w <code class="language-plaintext highlighter-rouge">Source port</code>). Takie połączenie będzie przechodzić przez ssh i dzięki temu będzie w całości szyfrowane.</p>
+
+<h4 id="automatyzacja">Automatyzacja</h4>
+
+<p>Rozwiązanie takie możemy również zautomatyzować skryptem. Możemy do tego użyć np. aplikacji konsolowej dołączanej do <code class="language-plaintext highlighter-rouge">Putty</code>, czyli <code class="language-plaintext highlighter-rouge">plink</code>. Jest to Putty działające z linii poleceń. Przyjmuje różne argumenty, jak np. nazwę zapisanej sesji (<code class="language-plaintext highlighter-rouge">load</code>), login (<code class="language-plaintext highlighter-rouge">l</code>), czy hasło (<code class="language-plaintext highlighter-rouge">pw</code>).</p>
+
+<p><code class="language-plaintext highlighter-rouge">plink -load mac_session_name -l mac_login -pw mac_password</code></p>
+
+<p>W taki sposób możemy szybciej ustanowić bezpieczne połączenie.</p>
+
+<p>Klientów VNC również można używać z linii poleceń. Przykładowo:</p>
+
+<p>UltraVNC: <code class="language-plaintext highlighter-rouge">vncviewer localhost:5901 -password my_password</code></p>
+
+<p>TightVNC: <code class="language-plaintext highlighter-rouge">vncviewer -optionsfile="my_config_file.vnc"</code></p>
+
+<p>RealVNC:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">vncviewer localhost:5901</code></li>
+  <li><code class="language-plaintext highlighter-rouge">vncviewer -config my_config_file.vnc</code></li>
+</ul>
+
+<p>Z tego co zauważyłem TightVNC i RealVNC nie pozwalają na podanie hasła jako parametru (jest to hasło do połączenia VNC, a nie do profilu użytkownika na Macu), można je jednak zapisać w konfiguracji sesji – w pliku z rozszerzeniem vnc. Niestety nie znalazłem opcji w RealVNC do stworzenia takiego pliku, ale przeglądając sieć wydaje mi się, że taka opcja była dostępna w poprzednich wersjach. TightVNC natomiast taką opcję posiada. Możemy zapisać sesję w pliku .vnc (z hasłem lub bez) po ustanowieniu połączenia. Taki plik jest również rozpoznawany przez RealVNC.</p>
+
+<h4 id="podsumowanie">Podsumowanie</h4>
+
+<p>Zdalna praca z Mac’iem jest dosyć prosta – przynajmniej na pierwszy rzut oka. Nie jest to bardzo wygodne rozwiązanie, ale jeśli potrzebujemy go tylko do budowania i od czasu do czasu jakieś konfiguracji – powinno w pełni wystarczyć. Dodanie dodatkowej warstwy bezpieczeństwa również nie wymaga dużo pracy, a do tego łatwo to zautomatyzować.</p>
+
+<p>Jeśli używacie innego sposobu na pracę z Mac’iem, czy macie podobne, ale wygodniejsze rozwiązanie – chętnie o tym przeczytam w komentarzach.</p>
+
+  </div><a class="u-url" href="/2017/11/05/zdalna-praca-mac-mini-bezpiecznym-polaczeniem-vnc-ssh/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Lazy Loading</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Lazy Loading</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tomwis"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tomwis</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Blog o mobilnym programowaniu w C#</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
