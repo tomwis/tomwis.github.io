@@ -21,7 +21,7 @@
 title: Lazy Loading
 description: >- # this means to ignore newlines until "baseurl:"
   Blog o mobilnym programowaniu w C#
-baseurl: "/lazyloading" # the subpath of your site, e.g. /blog
+baseurl: "/lazy-loading" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  tomwis
 
